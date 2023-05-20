@@ -5,7 +5,8 @@ import { api } from "~/utils/api"
 import { UserButton } from "@clerk/nextjs"
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" })
+  const { data } = api.climate.getAll.useQuery()
+  //console.log(data)
 
   return (
     <>
