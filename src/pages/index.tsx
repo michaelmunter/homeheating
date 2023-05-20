@@ -6,7 +6,7 @@ import { UserButton } from "@clerk/nextjs"
 
 const Home: NextPage = () => {
   const { data } = api.climate.getAll.useQuery()
-  //console.log(data)
+  console.log(data)
 
   return (
     <>
