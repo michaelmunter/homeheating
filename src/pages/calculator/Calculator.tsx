@@ -1,6 +1,6 @@
 import { api } from "~/utils/api"
 
-export default function ({ testValue }: { testValue: string }) {
+export default function Calculator({ testValue }: { testValue: string }) {
   const { data, status } = api.test.add2numbers.useQuery({ n1: 7, n2: 3 })
   console.log(status)
   console.log(data)
