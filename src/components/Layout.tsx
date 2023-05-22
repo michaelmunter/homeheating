@@ -16,8 +16,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Head>
       <header className="flex flex-row items-end justify-center gap-5 bg-red-900 py-2 pr-4">
         <h1 className="text-stone-50">Header</h1>
-        {!user && <SignInButton afterSignInUrl={asPath} />}
-        {user && <UserButton afterSignOutUrl={asPath} />}
+        {user ? (
+          <UserButton afterSignOutUrl={asPath} />
+        ) : (
+          <SignInButton afterSignInUrl={asPath} />
+        )}
       </header>
       <main className="flex-grow bg-gradient-to-b from-neutral-100 to-neutral-200">
         {children}

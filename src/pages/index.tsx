@@ -1,8 +1,5 @@
 import { type NextPage } from "next"
-import Head from "next/head"
-import Link from "next/link"
-import { api } from "~/utils/api"
-import { UserButton } from "@clerk/nextjs"
+
 import Calculator from "./calculator/Calculator"
 
 const Home: NextPage = () => {
