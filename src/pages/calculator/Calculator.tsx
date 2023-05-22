@@ -16,7 +16,7 @@ export default function Calculator() {
   return (
     <div className="flex flex-col items-center justify-center  ">
       <div className="flex flex-row justify-center  gap-12 px-4 py-16 ">
-        <HomeDemand mutate={mutation.mutate} />
+        <HomeDemand mutation={mutation} />
         <HeatSource />
         <Results />
       </div>

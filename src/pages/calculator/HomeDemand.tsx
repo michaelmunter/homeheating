@@ -1,7 +1,21 @@
+import { TRPCClientErrorLike } from "@trpc/client"
+import { UseTRPCMutationResult } from "@trpc/react-query/shared"
 import { useState, useEffect } from "react"
+import { input } from "zod"
 import { api } from "~/utils/api"
 
-export default function HomeDemand({ mutate }: any) {
+type MutationType = UseTRPCMutationResult<
+  number,
+  TRPCClientErrorLike<any>,
+  { n1: number; n2: number },
+  any
+>
+
+type ActionsProps = {
+  mutation: MutationType
+}
+
+export default function HomeDemand({ mutation }: ActionsProps) {
   const [inputs, setInputs] = useState({
     heatLoss: "",
     area: "",
@@ -17,11 +31,13 @@ export default function HomeDemand({ mutate }: any) {
     if (allInputsFilled) {
       // Do X here
       console.log("All inputs are filled")
-      mutate({ n1: 7, n2: 3 })
+      mutation.mutate({ n1: 7, n2: 3 })
     }
   }, [inputs, allInputsFilled])
 
-  const handleChange = (event: any) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => {
     const { name, value } = event.target
     setInputs((prevState) => ({
       ...prevState,
