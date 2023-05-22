@@ -1,4 +1,19 @@
-export default function Actions({ mutation, handleClick }: any) {
+import { UseTRPCMutationResult } from "@trpc/react-query/shared"
+import { TRPCClientErrorLike } from "@trpc/client"
+
+type MutationType = UseTRPCMutationResult<
+  number,
+  TRPCClientErrorLike<any>,
+  any,
+  any
+>
+
+type ActionsProps = {
+  mutation: MutationType
+  handleClick: () => void
+}
+
+export default function Actions({ mutation, handleClick }: ActionsProps) {
   console.log("comp: ", mutation.data)
   return (
     <div>
