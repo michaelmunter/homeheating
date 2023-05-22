@@ -1,10 +1,14 @@
 import type { UseTRPCMutationResult } from "@trpc/react-query/shared"
-import { TRPCClientErrorLike } from "@trpc/client"
+import type { TRPCClientErrorLike } from "@trpc/client"
+import { TRPCError, inferProcedureOutput } from "@trpc/server"
+import { Mutation } from "@tanstack/react-query"
+import { api } from "~/utils/api"
+import { inferRouterOutputs } from "@trpc/server"
 
 type MutationType = UseTRPCMutationResult<
   number,
   TRPCClientErrorLike<any>,
-  any,
+  { n1: number; n2: number },
   any
 >
 
@@ -14,7 +18,7 @@ type ActionsProps = {
 }
 
 export default function Actions({ mutation, handleClick }: ActionsProps) {
-  console.log("comp: ", mutation.data)
+  console.log("type: ", mutation)
   return (
     <div>
       <button
