@@ -19,7 +19,7 @@ export default function Calculator() {
         <HeatSource />
         <Results />
       </div>
-      <Actions color="yellow" handleClick={handleClick} />
+      <Actions handleClick={handleClick} />
     </div>
   )
 }
