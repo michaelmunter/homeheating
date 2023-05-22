@@ -8,7 +8,7 @@ export default function Calculator() {
   const mutation = api.test.mutateAdder.useMutation()
 
   const handleClick = () => {
-    mutation.mutate({ n1: 7, n2: 3 })
+    mutation.mutate({ n1: 9, n2: 3 })
     console.log("click")
   }
   console.log("parent: ", mutation.data)

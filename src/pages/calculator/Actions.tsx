@@ -1,5 +1,17 @@
-import { UseTRPCMutationResult } from "@trpc/react-query/shared"
+import type { UseTRPCMutationResult } from "@trpc/react-query/shared"
 import { TRPCClientErrorLike } from "@trpc/client"
+import { ZodError } from "zod"
+import { BuildProcedure } from "@trpc/server"
+
+type MyError = [
+  {
+    code: string
+    expected: string
+    received: string
+    path: string[]
+    message: string
+  }
+]
 
 type MutationType = UseTRPCMutationResult<
   number,
