@@ -4,7 +4,7 @@ import HeatSource from "./HeatSource"
 import Results from "./Results"
 import Actions from "./Actions"
 
-export default function Calculator({ testValue }: { testValue: string }) {
+export default function Calculator() {
   const mutation = api.test.mutateAdder.useMutation()
 
   const handleClick = () => {
@@ -15,9 +15,9 @@ export default function Calculator({ testValue }: { testValue: string }) {
   return (
     <div className="flex flex-col items-center justify-center  ">
       <div className="flex flex-row justify-center  gap-12 px-4 py-16 ">
-        <Home color="red" />
-        <HeatSource color="green" />
-        <Results color="blue" />
+        <Home />
+        <HeatSource />
+        <Results />
       </div>
       <Actions color="yellow" handleClick={handleClick} />
     </div>

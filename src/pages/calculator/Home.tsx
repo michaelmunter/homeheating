@@ -1,4 +1,4 @@
-export default function Home({ color }: { color: string }) {
+export default function Home() {
   return (
     <div className="w-52">
       <h1 className="pb-10 text-2xl">Home</h1>

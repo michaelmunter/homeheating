@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex  flex-col ">
       <div className=" ">
-        <Calculator testValue="succesful test" />
+        <Calculator />
       </div>
     </div>
   )

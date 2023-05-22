@@ -1,4 +1,4 @@
-export default function HeatSource({ color }: { color: string }) {
+export default function HeatSource() {
   return (
     <div className="w-52">
       <h1 className="pb-10 text-2xl">Heat Source</h1>
