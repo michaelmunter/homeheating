@@ -11,14 +11,12 @@ datasource db {
   relationMode = "prisma"
 }
 
-
 model Climate {
   id        Int      @id @default(autoincrement())
   date      DateTime @map("date")
   location  String   @map("location")
   air_temp  Float    @map("air_temp")
   gnd_temp  Float    @map("gnd_temp")
-
 
   @@map("climate_data")
 }

@@ -13,12 +13,10 @@ const Home: NextPage = () => {
   // console.log(result.data)
 
   return (
-    <div>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <Calculator testValue="succesful test" />
-        </div>
-      </main>
+    <div className="flex  flex-col ">
+      <div className=" ">
+        <Calculator testValue="succesful test" />
+      </div>
     </div>
   )
 }
