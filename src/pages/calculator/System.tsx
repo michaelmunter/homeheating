@@ -16,7 +16,7 @@ export default function Heat({ system, handleChange }: PropTypes) {
         <select
           name="system_type"
           onChange={handleChange}
-          value={system.system_type ?? ""}
+          value={system?.system_type ?? ""}
         >
           <option value="aw_pump">Air-Water Heat Pump</option>
           <option value="aa_pump">Air-Air Heat Pump</option>
@@ -26,7 +26,7 @@ export default function Heat({ system, handleChange }: PropTypes) {
         <input
           onChange={handleChange}
           name="cop"
-          value={system.cop ?? ""}
+          value={system?.cop ?? ""}
         ></input>
       </div>
     </div>

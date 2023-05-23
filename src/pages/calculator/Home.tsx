@@ -7,6 +7,11 @@ type PropTypes = {
 
 export default function Home({ home, handleChange }: PropTypes) {
   console.log(home)
+
+  //Vercel build error: TypeError: Cannot read property 'heatLoss' of undefined
+  //This is because the initial state of home is null and the component is rendered before the state is set to the default value of homeType. How to fix it?
+  //The solution is to use optional chaining: home?.heatLoss ?? ""
+
   //if (!home) return null
   return (
     <div className="w-52">
@@ -16,16 +21,20 @@ export default function Home({ home, handleChange }: PropTypes) {
         <input
           name="heatLoss"
           onChange={handleChange}
-          value={home.heatLoss ?? ""}
+          value={home?.heatLoss ?? ""}
         ></input>
         <label>Area</label>
         <input
           name="area"
           onChange={handleChange}
-          value={home.area ?? ""}
+          value={home?.area ?? ""}
         ></input>
         <label>Distribution</label>
-        <select name="heat_dist" onChange={handleChange} value={home.heat_dist}>
+        <select
+          name="heat_dist"
+          onChange={handleChange}
+          value={home?.heat_dist}
+        >
           <option value="radiators">Radiators</option>
           <option value="underfloor">Underfloor</option>
         </select>
@@ -33,13 +42,13 @@ export default function Home({ home, handleChange }: PropTypes) {
         <input
           name="residents"
           onChange={handleChange}
-          value={home.residents ?? ""}
+          value={home?.residents ?? ""}
         ></input>
         <label>Temp. Setting</label>
         <input
           name="tempSetting"
           onChange={handleChange}
-          value={home.tempSetting ?? ""}
+          value={home?.tempSetting ?? ""}
         ></input>
       </div>
     </div>
