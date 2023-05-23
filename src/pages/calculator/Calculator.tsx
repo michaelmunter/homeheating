@@ -19,15 +19,15 @@ export type systemType = {
 
 export default function Calculator() {
   const [home, setHome] = useState<homeType>({
-    heatLoss: null,
-    area: null,
+    heatLoss: 1,
+    area: 1,
     heat_dist: "radiators",
-    residents: null,
+    residents: 1,
     tempSetting: 22,
   })
   const [system, setSystem] = useState<systemType>({
     system_type: "aw_pump",
-    cop: null,
+    cop: 1,
   })
   const mutation = api.test.mutateAdder.useMutation()
 
