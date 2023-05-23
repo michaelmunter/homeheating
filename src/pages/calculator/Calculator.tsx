@@ -18,8 +18,6 @@ export type systemType = {
 }
 
 export default function Calculator() {
-  const mutation = api.test.mutateAdder.useMutation()
-
   const [home, setHome] = useState<homeType>({
     heatLoss: null,
     area: null,
@@ -31,6 +29,7 @@ export default function Calculator() {
     system_type: "aw_pump",
     cop: null,
   })
+  const mutation = api.test.mutateAdder.useMutation()
 
   const handleClick = () => {
     mutation.mutate({ n1: 9, n2: 3 })
