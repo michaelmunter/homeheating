@@ -1,7 +1,7 @@
 import { RouterOutputs, api } from "~/utils/api"
 import { AppRouter, appRouter } from "~/server/api/root"
-import HomeDemand from "./Home"
-import HeatSystem from "./System"
+import Home from "./Home"
+import System from "./System"
 import Results from "./Results"
 import Actions from "./Actions"
 import { useState } from "react"
@@ -9,7 +9,7 @@ import { type } from "os"
 import { TypeOf } from "zod"
 
 export type homeType = {
-  heatLossFactor: number | null
+  heatLoss: number | null
   area: number | null
   heat_dist: string
   residents: number | null
@@ -24,7 +24,7 @@ export default function Calculator() {
   const mutation = api.test.mutateAdder.useMutation()
 
   const [home, setHome] = useState<homeType>({
-    heatLossFactor: null,
+    heatLoss: null,
     area: null,
     heat_dist: "radiators",
     residents: null,
@@ -54,8 +54,8 @@ export default function Calculator() {
   return (
     <div className="flex flex-col items-center justify-center  ">
       <div className="flex flex-row justify-center  gap-12 px-4 py-16 ">
-        <HomeDemand handleChange={handleChange} home={home} />
-        <HeatSystem system={system} handleChange={handleChange} />
+        <Home handleChange={handleChange} home={home} />
+        <System system={system} handleChange={handleChange} />
         <Results />
       </div>
       <Actions mutation={mutation} handleClick={handleClick} />

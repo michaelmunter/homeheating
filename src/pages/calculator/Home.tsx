@@ -18,23 +18,15 @@ type PropTypes = {
 }
 
 export default function HomeDemand({ home, handleChange }: PropTypes) {
-  const [inputs, setInputs] = useState({
-    heatLoss: "",
-    area: "",
-    heat_dist: "radiators",
-    residents: "",
-    tempSetting: "",
-  })
-
   return (
     <div className="w-52">
       <h1 className="pb-10 text-2xl">Home</h1>
       <div className="grid grid-cols-2 gap-2">
         <label>Heat Loss</label>
         <input
-          name="heatLossFactor"
+          name="heatLoss"
           onChange={handleChange}
-          value={home.heatLossFactor ?? ""}
+          value={home.heatLoss ?? ""}
         ></input>
         <label>Area</label>
         <input
