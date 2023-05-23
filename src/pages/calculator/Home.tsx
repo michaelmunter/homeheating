@@ -6,6 +6,7 @@ type PropTypes = {
 }
 
 export default function Home({ home, handleChange }: PropTypes) {
+  console.log(home)
   if (!home) return null
   return (
     <div className="w-52">
