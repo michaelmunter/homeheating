@@ -1,9 +1,5 @@
 import type { UseTRPCMutationResult } from "@trpc/react-query/shared"
 import type { TRPCClientErrorLike } from "@trpc/client"
-import { TRPCError, inferProcedureOutput } from "@trpc/server"
-import { Mutation } from "@tanstack/react-query"
-import { api } from "~/utils/api"
-import { inferRouterOutputs } from "@trpc/server"
 
 type MutationType = UseTRPCMutationResult<
   number,

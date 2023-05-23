@@ -3,19 +3,21 @@ import { UseTRPCMutationResult } from "@trpc/react-query/shared"
 import { useState, useEffect } from "react"
 import { input } from "zod"
 import { api } from "~/utils/api"
+import { homeType } from "./Calculator"
 
-type MutationType = UseTRPCMutationResult<
-  number,
-  TRPCClientErrorLike<any>,
-  { n1: number; n2: number },
-  any
->
+// type MutationType = UseTRPCMutationResult<
+//   number,
+//   TRPCClientErrorLike<any>,
+//   { n1: number; n2: number },
+//   any
+// >
 
-type ActionsProps = {
-  mutation: MutationType
+type PropTypes = {
+  home: homeType
+  handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement>
 }
 
-export default function HomeDemand({ mutation }: ActionsProps) {
+export default function HomeDemand({ home, handleChange }: PropTypes) {
   const [inputs, setInputs] = useState({
     heatLoss: "",
     area: "",
@@ -24,45 +26,24 @@ export default function HomeDemand({ mutation }: ActionsProps) {
     tempSetting: "",
   })
 
-  // Check if all inputs are filled
-  const allInputsFilled = Object.values(inputs).every((input) => input !== "")
-
-  useEffect(() => {
-    if (allInputsFilled) {
-      // Do X here
-      console.log("All inputs are filled")
-      mutation.mutate({ n1: 7, n2: 3 })
-    }
-  }, [inputs, allInputsFilled])
-
-  const handleChange = (
-    event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
-  ) => {
-    const { name, value } = event.target
-    setInputs((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
-  }
-
   return (
     <div className="w-52">
       <h1 className="pb-10 text-2xl">Home</h1>
       <div className="grid grid-cols-2 gap-2">
         <label>Heat Loss</label>
         <input
-          name="heatLoss"
+          name="heatLossFactor"
           onChange={handleChange}
-          value={inputs.heatLoss}
+          value={home.heatLossFactor ?? ""}
         ></input>
         <label>Area</label>
-        <input name="area" onChange={handleChange} value={inputs.area}></input>
-        <label>Distribution</label>
-        <select
-          name="heat_dist"
+        <input
+          name="area"
           onChange={handleChange}
-          value={inputs.heat_dist}
-        >
+          value={home.area ?? ""}
+        ></input>
+        <label>Distribution</label>
+        <select name="heat_dist" onChange={handleChange} value={home.heat_dist}>
           <option value="radiators">Radiators</option>
           <option value="underfloor">Underfloor</option>
         </select>
@@ -70,13 +51,13 @@ export default function HomeDemand({ mutation }: ActionsProps) {
         <input
           name="residents"
           onChange={handleChange}
-          value={inputs.residents}
+          value={home.residents ?? ""}
         ></input>
         <label>Temp. Setting</label>
         <input
           name="tempSetting"
           onChange={handleChange}
-          value={inputs.tempSetting}
+          value={home.tempSetting ?? ""}
         ></input>
       </div>
     </div>
