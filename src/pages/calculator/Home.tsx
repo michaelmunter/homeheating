@@ -1,23 +1,11 @@
-import { TRPCClientErrorLike } from "@trpc/client"
-import { UseTRPCMutationResult } from "@trpc/react-query/shared"
-import { useState, useEffect } from "react"
-import { input } from "zod"
-import { api } from "~/utils/api"
 import { homeType } from "./Calculator"
-
-// type MutationType = UseTRPCMutationResult<
-//   number,
-//   TRPCClientErrorLike<any>,
-//   { n1: number; n2: number },
-//   any
-// >
 
 type PropTypes = {
   home: homeType
   handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement>
 }
 
-export default function HomeDemand({ home, handleChange }: PropTypes) {
+export default function Home({ home, handleChange }: PropTypes) {
   return (
     <div className="w-52">
       <h1 className="pb-10 text-2xl">Home</h1>

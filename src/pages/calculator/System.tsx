@@ -6,7 +6,7 @@ type PropTypes = {
   handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement>
 }
 
-export default function HeatSystem({ system, handleChange }: PropTypes) {
+export default function Heat({ system, handleChange }: PropTypes) {
   return (
     <div className="w-52">
       <h1 className="pb-10 text-2xl">Heat Source</h1>

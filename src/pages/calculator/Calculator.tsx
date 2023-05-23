@@ -1,12 +1,9 @@
-import { RouterOutputs, api } from "~/utils/api"
-import { AppRouter, appRouter } from "~/server/api/root"
+import { api } from "~/utils/api"
 import Home from "./Home"
 import System from "./System"
 import Results from "./Results"
 import Actions from "./Actions"
 import { useState } from "react"
-import { type } from "os"
-import { TypeOf } from "zod"
 
 export type homeType = {
   heatLoss: number | null
@@ -44,11 +41,11 @@ export default function Calculator() {
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
     const { name, value } = e.target
-    if (Object.keys(home).includes(name)) {
-      setHome((prevHome) => ({ ...prevHome, [name]: value }))
-    } else if (Object.keys(system).includes(name)) {
-      setSystem((prevSystem) => ({ ...prevSystem, [name]: value }))
-    }
+    // if (Object.keys(home).includes(name)) {
+    //   setHome((prevHome) => ({ ...prevHome, [name]: value }))
+    // } else if (Object.keys(system).includes(name)) {
+    //   setSystem((prevSystem) => ({ ...prevSystem, [name]: value }))
+    // }
   }
 
   return (
