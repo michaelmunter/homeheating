@@ -6,6 +6,7 @@ type PropTypes = {
 }
 
 export default function Home({ home, handleChange }: PropTypes) {
+  if (!home) return null
   return (
     <div className="w-52">
       <h1 className="pb-10 text-2xl">Home</h1>
