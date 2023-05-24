@@ -39,9 +39,9 @@ export default function Calculator() {
   })
   const apiCalc = api.calc.calc.useMutation()
 
-  if (apiCalc.isLoading) console.log("loading...")
-  else if (apiCalc.isError) console.log("error: ", apiCalc.error)
-  else if (apiCalc.isSuccess) console.log("success: ", apiCalc.data)
+  // if (apiCalc.isLoading) console.log("loading...")
+  // else if (apiCalc.isError) console.log("error: ", apiCalc.error)
+  // else if (apiCalc.isSuccess) console.log("success: ", apiCalc.data)
 
   const handleClick = () => {
     const parsedHome = {
