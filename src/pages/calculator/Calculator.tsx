@@ -38,6 +38,7 @@ export default function Calculator() {
     cop: "",
   })
   const apiCalc = api.calc.calc.useMutation()
+  console.log("apiCalc: ", apiCalc.data)
 
   const handleClick = () => {
     const parsedHome = {
