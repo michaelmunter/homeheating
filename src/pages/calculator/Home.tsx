@@ -6,22 +6,21 @@ type PropTypes = {
 }
 
 export default function Home({ home, handleChange }: PropTypes) {
-  console.log(home)
-
-  //Vercel build error: TypeError: Cannot read property 'heatLoss' of undefined
-  //This is because the initial state of home is null and the component is rendered before the state is set to the default value of homeType. How to fix it?
-  //The solution is to use optional chaining: home?.heatLoss ?? ""
-
-  //if (!home) return null
   return (
-    <div className="w-52">
+    <div className="w-72">
       <h1 className="pb-10 text-2xl">Home</h1>
       <div className="grid grid-cols-2 gap-2">
+        <label>Building Year</label>
+        <input
+          name="location"
+          onChange={handleChange}
+          value={home?.buildYear ?? ""}
+        ></input>
         <label>Heat Loss</label>
         <input
           name="heatLoss"
           onChange={handleChange}
-          value={home?.heatLoss ?? ""}
+          value={home?.heatLossFactor ?? ""}
         ></input>
         <label>Area</label>
         <input
@@ -30,11 +29,7 @@ export default function Home({ home, handleChange }: PropTypes) {
           value={home?.area ?? ""}
         ></input>
         <label>Distribution</label>
-        <select
-          name="heat_dist"
-          onChange={handleChange}
-          value={home?.heat_dist}
-        >
+        <select name="heat_dist" onChange={handleChange} value={home?.heatDist}>
           <option value="radiators">Radiators</option>
           <option value="underfloor">Underfloor</option>
         </select>
@@ -49,6 +44,28 @@ export default function Home({ home, handleChange }: PropTypes) {
           name="tempSetting"
           onChange={handleChange}
           value={home?.tempSetting ?? ""}
+        ></input>
+        <label>Heat System</label>
+        <select
+          name="system_type"
+          onChange={handleChange}
+          value={home?.systemType ?? ""}
+        >
+          <option value="aw_pump">Air-Water Pump</option>
+          <option value="aa_pump">Air-Air Pump</option>
+          <option value="gw_pump">Ground-Water Pump</option>
+        </select>
+        <label>COP</label>
+        <input
+          name="cop"
+          onChange={handleChange}
+          value={home?.cop ?? ""}
+        ></input>
+        <label>Location</label>
+        <input
+          name="location"
+          onChange={handleChange}
+          value={home?.location ?? ""}
         ></input>
       </div>
     </div>

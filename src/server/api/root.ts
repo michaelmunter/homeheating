@@ -1,7 +1,7 @@
 import { createTRPCRouter } from "~/server/api/trpc"
 import { exampleRouter } from "~/server/api/routers/example"
 import { climateRouter } from "~/server/api/routers/climate"
-import { homeRouter } from "./routers/home"
+import { calcRouter } from "./routers/calcRouter"
 import { testRouter } from "./routers/test"
 
 /**
@@ -12,7 +12,7 @@ import { testRouter } from "./routers/test"
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
   climate: climateRouter,
-  home: homeRouter,
+  calc: calcRouter,
   test: testRouter,
 })
 

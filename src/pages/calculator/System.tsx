@@ -7,7 +7,6 @@ type PropTypes = {
 }
 
 export default function Heat({ system, handleChange }: PropTypes) {
-  //if (!system) return null
   return (
     <div className="w-52">
       <h1 className="pb-10 text-2xl">Heat Source</h1>
@@ -16,7 +15,7 @@ export default function Heat({ system, handleChange }: PropTypes) {
         <select
           name="system_type"
           onChange={handleChange}
-          value={system?.system_type ?? ""}
+          value={system?.systemType ?? ""}
         >
           <option value="aw_pump">Air-Water Heat Pump</option>
           <option value="aa_pump">Air-Air Heat Pump</option>

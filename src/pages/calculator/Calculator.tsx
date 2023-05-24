@@ -6,34 +6,62 @@ import Actions from "./Actions"
 import { useState } from "react"
 
 export type homeType = {
-  heatLoss: number | null
-  area: number | null
-  heat_dist: string
-  residents: number | null
-  tempSetting: number
+  buildYear: string
+  heatLossFactor: string
+  area: string
+  heatDist: string
+  residents: string
+  tempSetting: string
+  systemType: string
+  cop: string
+  location: string
 }
 export type systemType = {
-  system_type: string
-  cop: number | null
+  systemType: string
+  cop: string
 }
 
 export default function Calculator() {
   const [home, setHome] = useState<homeType>({
-    heatLoss: null,
-    area: null,
-    heat_dist: "radiators",
-    residents: null,
-    tempSetting: 22,
+    buildYear: "",
+    heatLossFactor: "",
+    area: "",
+    heatDist: "radiators",
+    residents: "",
+    tempSetting: "22",
+    systemType: "aw_pump",
+    cop: "",
+    location: "DK",
   })
   const [system, setSystem] = useState<systemType>({
-    system_type: "aw_pump",
-    cop: null,
+    systemType: "aw_pump",
+    cop: "",
   })
-  const mutation = api.test.mutateAdder.useMutation()
+  const apiCalc = api.calc.calc.useMutation()
 
   const handleClick = () => {
-    mutation.mutate({ n1: 9, n2: 3 })
-    console.log("click")
+    const parsedHome = {
+      ...home,
+      heatLossFactor: home.heatLossFactor
+        ? parseFloat(home.heatLossFactor.replace(",", ""))
+        : 0,
+      area: home.area ? parseFloat(home.area.replace(",", "")) : 0,
+      residents: home.residents ? parseInt(home.residents.replace(",", "")) : 0,
+      tempSetting: parseFloat(home.tempSetting),
+      cop: home.cop ? parseFloat(home.cop.replace(",", "")) : 0,
+    }
+    for (let key in parsedHome) {
+      if (
+        parsedHome[key as keyof typeof parsedHome] === null ||
+        parsedHome[key as keyof typeof parsedHome] === ""
+      ) {
+        alert(`Please fill out ${key} before submitting.`)
+        return // Exit the function if a required value is missing
+      }
+    }
+
+    apiCalc.mutate(parsedHome)
+    console.log("object sent: ", parsedHome)
   }
 
   const handleChange = (
@@ -51,10 +79,12 @@ export default function Calculator() {
     <div className="flex flex-col items-center justify-center  ">
       <div className="flex flex-row justify-center  gap-12 px-4 py-16 ">
         <Home handleChange={handleChange} home={home} />
-        <System system={system} handleChange={handleChange} />
+
         <Results />
       </div>
-      <Actions mutation={mutation} handleClick={handleClick} />
+      <Actions handleClick={handleClick} />
     </div>
   )
 }
+
+//<System system={system} handleChange={handleChange} />

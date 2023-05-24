@@ -1,20 +1,19 @@
 import type { UseTRPCMutationResult } from "@trpc/react-query/shared"
 import type { TRPCClientErrorLike } from "@trpc/client"
+import { homeType } from "./Calculator"
 
-type MutationType = UseTRPCMutationResult<
-  number,
-  TRPCClientErrorLike<any>,
-  { n1: number; n2: number },
-  any
->
+// type MutationType = UseTRPCMutationResult<
+//   number,
+//   TRPCClientErrorLike<any>,
+//   homeType,
+//   any
+// >
 
-type ActionsProps = {
-  mutation: MutationType
+type PropTypes = {
   handleClick: () => void
 }
 
-export default function Actions({ mutation, handleClick }: ActionsProps) {
-  console.log("type: ", mutation)
+export default function Actions({ handleClick }: PropTypes) {
   return (
     <div>
       <button
