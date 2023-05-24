@@ -3,7 +3,7 @@ import Home from "./Home"
 import System from "./System"
 import Results from "./Results"
 import Actions from "./Actions"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export type homeType = {
   buildYear: string
@@ -39,9 +39,11 @@ export default function Calculator() {
   })
   const apiCalc = api.calc.calc.useMutation()
 
-  // if (apiCalc.isLoading) console.log("loading...")
-  // else if (apiCalc.isError) console.log("error: ", apiCalc.error)
-  // else if (apiCalc.isSuccess) console.log("success: ", apiCalc.data)
+  useEffect(() => {
+    if (apiCalc.isSuccess) {
+      console.log("object received: ", apiCalc.data)
+    }
+  }, [apiCalc.isSuccess])
 
   const handleClick = () => {
     const parsedHome = {
