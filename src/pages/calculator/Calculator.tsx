@@ -45,6 +45,18 @@ export default function Calculator() {
     }
   }, [apiCalc.isSuccess])
 
+  useEffect(() => {
+    if (apiCalc.isLoading) {
+      console.log("loading: ")
+    }
+  }, [apiCalc.isLoading])
+
+  useEffect(() => {
+    if (apiCalc.isError) {
+      console.log("error: ", apiCalc.error)
+    }
+  }, [apiCalc.isError])
+
   const handleClick = () => {
     const parsedHome = {
       ...home,
