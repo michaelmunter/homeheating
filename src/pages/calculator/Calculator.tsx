@@ -42,7 +42,7 @@ export default function Calculator() {
   if (apiCalc.isLoading) console.log("loading...")
   else if (apiCalc.isError) console.log("error: ", apiCalc.error)
   else if (apiCalc.isSuccess) console.log("success: ", apiCalc.data)
-  //
+
   const handleClick = () => {
     const parsedHome = {
       ...home,
