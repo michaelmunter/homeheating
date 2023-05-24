@@ -12,13 +12,13 @@ export default function Home({ home, handleChange }: PropTypes) {
       <div className="grid grid-cols-2 gap-2">
         <label>Building Year</label>
         <input
-          name="location"
+          name="buildYear"
           onChange={handleChange}
           value={home?.buildYear ?? ""}
         ></input>
         <label>Heat Loss</label>
         <input
-          name="heatLoss"
+          name="heatLossFactor"
           onChange={handleChange}
           value={home?.heatLossFactor ?? ""}
         ></input>
@@ -29,7 +29,7 @@ export default function Home({ home, handleChange }: PropTypes) {
           value={home?.area ?? ""}
         ></input>
         <label>Distribution</label>
-        <select name="heat_dist" onChange={handleChange} value={home?.heatDist}>
+        <select name="heatDist" onChange={handleChange} value={home?.heatDist}>
           <option value="radiators">Radiators</option>
           <option value="underfloor">Underfloor</option>
         </select>
@@ -47,7 +47,7 @@ export default function Home({ home, handleChange }: PropTypes) {
         ></input>
         <label>Heat System</label>
         <select
-          name="system_type"
+          name="systemType"
           onChange={handleChange}
           value={home?.systemType ?? ""}
         >

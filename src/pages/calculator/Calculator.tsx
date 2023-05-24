@@ -46,12 +46,15 @@ export default function Calculator() {
         ? parseFloat(home.heatLossFactor.replace(",", ""))
         : 0,
       area: home.area ? parseFloat(home.area.replace(",", "")) : 0,
+      buildYear: home.buildYear
+        ? parseFloat(home.buildYear.replace(",", ""))
+        : 0,
       residents: home.residents ? parseInt(home.residents.replace(",", "")) : 0,
       tempSetting: parseFloat(home.tempSetting),
       cop: home.cop ? parseFloat(home.cop.replace(",", "")) : 0,
     }
-    
-    for (const key in parsedHome) { 
+
+    for (const key in parsedHome) {
       if (
         parsedHome[key as keyof typeof parsedHome] === null ||
         parsedHome[key as keyof typeof parsedHome] === ""
@@ -60,8 +63,8 @@ export default function Calculator() {
         return // Exit the function if a required value is missing
       }
     }
-    
 
+    //test
     apiCalc.mutate(parsedHome)
     console.log("object sent: ", parsedHome)
   }
