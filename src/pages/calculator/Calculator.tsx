@@ -50,7 +50,8 @@ export default function Calculator() {
       tempSetting: parseFloat(home.tempSetting),
       cop: home.cop ? parseFloat(home.cop.replace(",", "")) : 0,
     }
-    for (let key in parsedHome) {
+    
+    for (const key in parsedHome) { 
       if (
         parsedHome[key as keyof typeof parsedHome] === null ||
         parsedHome[key as keyof typeof parsedHome] === ""
@@ -59,6 +60,7 @@ export default function Calculator() {
         return // Exit the function if a required value is missing
       }
     }
+    
 
     apiCalc.mutate(parsedHome)
     console.log("object sent: ", parsedHome)
