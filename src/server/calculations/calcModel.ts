@@ -129,12 +129,12 @@ export default function calcModel(base: BaseType, climate: Climate[]) {
 
   return { ib, climate }
 }
-const calcGndWatPump = (ib: InterimBase_CalcType, climate: Climate[]) => {}
+// const calcGndWatPump = (ib: InterimBase_CalcType, climate: Climate[]) => {}
 
-const baseCalc = ({
-  tempSetting,
-  heatDist,
-  buildYear,
-  residents,
-  area,
-}: BaseType) => {}
+// const baseCalc = ({
+//   tempSetting,
+//   heatDist,
+//   buildYear,
+//   residents,
+//   area,
+// }: BaseType) => {}
