@@ -130,7 +130,7 @@ export default function calcModelTest(base: BaseType, climate: Climate[]) {
 
   const dTwo = ib.d.Two
   const systems: SystemsType = []
-  return { dTwo, ib, Tout }
+  return { dTwo, ib, Tout, climate }
 }
 const calcAWPump = (base: BaseType, climate: Climate, system: AWPumpType) => {
   //SystemType + AWPumpType merged

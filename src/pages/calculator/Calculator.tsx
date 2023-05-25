@@ -40,22 +40,10 @@ export default function Calculator() {
   const apiCalc = api.calc.calc.useMutation()
 
   useEffect(() => {
-    if (apiCalc.isSuccess) {
-      console.log("object received: ", apiCalc.data)
-    }
-  }, [apiCalc.isSuccess])
-
-  useEffect(() => {
-    if (apiCalc.isLoading) {
-      console.log("loading: ")
-    }
-  }, [apiCalc.isLoading])
-
-  useEffect(() => {
-    if (apiCalc.isError) {
-      console.log("error: ", apiCalc.error)
-    }
-  }, [apiCalc.isError])
+    apiCalc.isLoading && console.log("loading: ", apiCalc.isLoading)
+    apiCalc.isSuccess && console.log("data: ", apiCalc.data)
+    apiCalc.isError && console.log("error: ", apiCalc.isError)
+  }, [apiCalc.isLoading, apiCalc.isSuccess, apiCalc.isError])
 
   const handleClick = () => {
     const parsedHome = {

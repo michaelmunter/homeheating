@@ -2,10 +2,8 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc"
 import { z } from "zod"
 import calcModel from "~/server/calculations/calcModel"
 import { prisma } from "~/server/db"
-import { Climate } from "@prisma/client"
-import calcModelTest from "~/server/calculations/calcModelTest"
 
-const zHomeType = z.object({
+const clientData = z.object({
   heatLossFactor: z.number(),
   buildYear: z.number(),
   area: z.number(),
@@ -18,16 +16,16 @@ const zHomeType = z.object({
 })
 
 export const calcRouter = createTRPCRouter({
-  calc: publicProcedure.input(zHomeType).mutation(async ({ input }) => {
-    const climateData = await prisma.climate.findMany({
+  calc: publicProcedure.input(clientData).mutation(async ({ input }) => {
+    const climate = await prisma.climate.findMany({
       where: {
         location: input.location,
       },
     })
-    if (!climateData) {
+    if (!climate) {
       throw new Error(`No climate data found for location ${input.location}`)
     }
-    const result = calcModelTest(input, climateData)
+    const result = calcModel(input, climate)
     return result
   }),
 })
