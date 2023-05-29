@@ -1,11 +1,7 @@
-import type { UseTRPCMutationResult } from "@trpc/react-query/shared"
-import type { TRPCClientErrorLike } from "@trpc/client"
-import { homeType } from "./Calculator"
-
 // type MutationType = UseTRPCMutationResult<
 //   number,
 //   TRPCClientErrorLike<any>,
-//   homeType,
+//   BaseType,
 //   any
 // >
 
