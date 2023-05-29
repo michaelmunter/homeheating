@@ -1,11 +1,11 @@
 import { api } from "~/utils/api"
-import Home from "./Home"
-import System from "./System"
+import Base from "./Base"
+import Systems from "./Systems"
 import Results from "./Results"
 import Actions from "./Actions"
 import { useState, useEffect } from "react"
 
-export type homeType = {
+export type BaseType = {
   buildYear: string
   heatLossFactor: string
   area: string
@@ -16,13 +16,13 @@ export type homeType = {
   cop: string
   location: string
 }
-export type systemType = {
+export type SystemType = {
   systemType: string
   cop: string
 }
 
 export default function Calculator() {
-  const [home, setHome] = useState<homeType>({
+  const [base, setBase] = useState<BaseType>({
     buildYear: "",
     heatLossFactor: "",
     area: "",
@@ -33,7 +33,7 @@ export default function Calculator() {
     cop: "",
     location: "DK",
   })
-  const [system, setSystem] = useState<systemType>({
+  const [systems, setSystems] = useState<SystemType>({
     systemType: "aw_pump",
     cop: "",
   })
@@ -47,17 +47,17 @@ export default function Calculator() {
 
   const handleClick = () => {
     const parsedHome = {
-      ...home,
-      heatLossFactor: home.heatLossFactor
-        ? parseFloat(home.heatLossFactor.replace(",", ""))
+      ...base,
+      heatLossFactor: base.heatLossFactor
+        ? parseFloat(base.heatLossFactor.replace(",", ""))
         : 0,
-      area: home.area ? parseFloat(home.area.replace(",", "")) : 0,
-      buildYear: home.buildYear
-        ? parseFloat(home.buildYear.replace(",", ""))
+      area: base.area ? parseFloat(base.area.replace(",", "")) : 0,
+      buildYear: base.buildYear
+        ? parseFloat(base.buildYear.replace(",", ""))
         : 0,
-      residents: home.residents ? parseInt(home.residents.replace(",", "")) : 0,
-      tempSetting: parseFloat(home.tempSetting),
-      cop: home.cop ? parseFloat(home.cop.replace(",", "")) : 0,
+      residents: base.residents ? parseInt(base.residents.replace(",", "")) : 0,
+      tempSetting: parseFloat(base.tempSetting),
+      cop: base.cop ? parseFloat(base.cop.replace(",", "")) : 0,
     }
 
     for (const key in parsedHome) {
@@ -79,18 +79,18 @@ export default function Calculator() {
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
     const { name, value } = e.target
-    if (Object.keys(home).includes(name)) {
-      setHome((prevHome) => ({ ...prevHome, [name]: value }))
-    } else if (Object.keys(system).includes(name)) {
-      setSystem((prevSystem) => ({ ...prevSystem, [name]: value }))
+    if (Object.keys(base).includes(name)) {
+      setBase((prevBase) => ({ ...prevBase, [name]: value }))
+    } else if (Object.keys(systems).includes(name)) {
+      setSystems((prevSystems) => ({ ...prevSystems, [name]: value }))
     }
   }
 
   return (
     <div className="flex flex-col items-center justify-center  ">
       <div className="flex flex-row justify-center  gap-12 px-4 py-16 ">
-        <Home handleChange={handleChange} home={home} />
-
+        <Base handleChange={handleChange} base={base} />
+        <Systems />
         <Results />
       </div>
       <Actions handleClick={handleClick} />

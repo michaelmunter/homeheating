@@ -1,11 +1,11 @@
-import { homeType } from "./Calculator"
+import { BaseType } from "./Calculator"
 
 type PropTypes = {
-  home: homeType
+  base: BaseType
   handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement>
 }
 
-export default function Home({ home, handleChange }: PropTypes) {
+export default function Home({ base, handleChange }: PropTypes) {
   return (
     <div className="w-72">
       <h1 className="pb-10 text-2xl">Home</h1>
@@ -14,22 +14,22 @@ export default function Home({ home, handleChange }: PropTypes) {
         <input
           name="buildYear"
           onChange={handleChange}
-          value={home?.buildYear ?? ""}
+          value={base?.buildYear ?? ""}
         ></input>
         <label>Heat Loss</label>
         <input
           name="heatLossFactor"
           onChange={handleChange}
-          value={home?.heatLossFactor ?? ""}
+          value={base?.heatLossFactor ?? ""}
         ></input>
         <label>Area</label>
         <input
           name="area"
           onChange={handleChange}
-          value={home?.area ?? ""}
+          value={base?.area ?? ""}
         ></input>
         <label>Distribution</label>
-        <select name="heatDist" onChange={handleChange} value={home?.heatDist}>
+        <select name="heatDist" onChange={handleChange} value={base?.heatDist}>
           <option value="radiators">Radiators</option>
           <option value="underfloor">Underfloor</option>
         </select>
@@ -37,19 +37,19 @@ export default function Home({ home, handleChange }: PropTypes) {
         <input
           name="residents"
           onChange={handleChange}
-          value={home?.residents ?? ""}
+          value={base?.residents ?? ""}
         ></input>
         <label>Temp. Setting</label>
         <input
           name="tempSetting"
           onChange={handleChange}
-          value={home?.tempSetting ?? ""}
+          value={base?.tempSetting ?? ""}
         ></input>
         <label>Heat System</label>
         <select
           name="systemType"
           onChange={handleChange}
-          value={home?.systemType ?? ""}
+          value={base?.systemType ?? ""}
         >
           <option value="aw_pump">Air-Water Pump</option>
           <option value="aa_pump">Air-Air Pump</option>
@@ -59,13 +59,13 @@ export default function Home({ home, handleChange }: PropTypes) {
         <input
           name="cop"
           onChange={handleChange}
-          value={home?.cop ?? ""}
+          value={base?.cop ?? ""}
         ></input>
         <label>Location</label>
         <input
           name="location"
           onChange={handleChange}
-          value={home?.location ?? ""}
+          value={base?.location ?? ""}
         ></input>
       </div>
     </div>

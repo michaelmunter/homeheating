@@ -1,6 +1,6 @@
 ### Tools
 
-- create-t3-app w/o NextAuth.js
+- create-t3-app w/o ~~NextAuth.js
 - React + Next.js
 - Prisma: ORM (object relational mapper) that helps in DB interaction
 - Tailwind CSS: CSS framework
@@ -13,14 +13,6 @@
 - Planetscale: DB
 - Stripe: Payment
 
-### Frequently Used Commands
+### Commands
 
 - gitacp "description": git add . && git commit -m "description" && git push
-
-### chatGPT commands
-
-- code only
-
-### GPT models for dev
-
-Auto-GPT, DeepTabNine, chatGPT
