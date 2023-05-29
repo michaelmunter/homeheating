@@ -41,7 +41,7 @@ export default function Calculator() {
 
   useEffect(() => {
     apiCalc.isLoading && console.log("loading: ", apiCalc.isLoading)
-    apiCalc.isSuccess && console.log("data: ", apiCalc.data)
+    apiCalc.isSuccess && console.log("data: ", apiCalc.isSuccess)
     apiCalc.isError && console.log("error: ", apiCalc.isError)
   }, [apiCalc.isLoading, apiCalc.isSuccess, apiCalc.isError])
 
