@@ -41,9 +41,10 @@ export default function Calculator() {
 
   useEffect(() => {
     apiCalc.isLoading && console.log("loading: ", apiCalc.isLoading)
-    apiCalc.isSuccess && console.log("data: ", apiCalc.isSuccess)
+    apiCalc.isSuccess && console.log("finished: ", apiCalc.isSuccess)
     apiCalc.isError && console.log("error: ", apiCalc.isError)
-  }, [apiCalc.isLoading, apiCalc.isSuccess, apiCalc.isError])
+    apiCalc.data && console.log("data: ", apiCalc.data)
+  }, [apiCalc.isLoading, apiCalc.isSuccess, apiCalc.isError, apiCalc.data])
 
   const handleClick = () => {
     const parsedHome = {
