@@ -30,16 +30,19 @@ export default function Systems() {
     control,
   })
 
-  // const onSubmit: SubmitHandler<FormValues> = (data) => {
-  //   console.log(data)
-  // }
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log(data)
+  }
 
   return (
     <div className="w-52">
       <h1 className=" pb-8 text-2xl">Systems</h1>
       <form
         className="flex flex-col "
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSubmit(onSubmit)(e).catch((err) => console.log(err))
+        }}
       >
         <button
           type="button"
