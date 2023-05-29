@@ -5,10 +5,9 @@ type PropTypes = {
   handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement>
 }
 
-export default function Home({ base, handleChange }: PropTypes) {
+export default function Base({ base, handleChange }: PropTypes) {
   return (
-    <div className="w-72">
-      <h1 className="pb-10 text-2xl">Home</h1>
+    <div className="w-52">
       <div className="grid grid-cols-2 gap-2">
         <label>Building Year</label>
         <input

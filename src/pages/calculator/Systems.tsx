@@ -36,7 +36,6 @@ export default function Systems() {
 
   return (
     <div className="w-52">
-      <h1 className=" pb-8 text-2xl">Systems</h1>
       <form
         className="flex flex-col "
         onSubmit={(e) => {

@@ -17,14 +17,14 @@ type BaseType = {
   location: string
 }
 
-type InterimBase_CalcType = {
+export type InterimBase_CalcType = {
   Tout_limit: number
   Two_17c: number
   Two_neg12c: number
   Twvb: number
   QroomDim: number
   Qwvb: number
-  d: { Qroom: number[]; Two: number[]; Qwvb: number[] }
+  d: [{ Qroom: number; Two: number }] | any
 }
 
 type InterimPump_CalcType = {
@@ -88,15 +88,15 @@ export default function calcModel(base: BaseType, climate: Climate[]) {
         base.area) /
       1000, // !!! antager helårshus
     Qwvb: base.residents ? (base.residents * 800 + 800) / (365 * 24) : 0, // !!! burde det ikke være minus 800?
-    d: { Qroom: [], Two: [], Qwvb: [] },
+    d: [],
   }
 
   const interim = (ib.Two_neg12c - ib.Two_17c) / 29
   for (let i = 0; i < climate.length; i++) {
-    ib.d.Qroom.push(
-      (ib.QroomDim / 32) * Math.max(ib.Tout_limit - airTemp[i], 0)
-    )
-    ib.d.Two.push(ib.Two_17c + interim * (17 - airTemp[i]))
+    ib.d.push({
+      Qroom: (ib.QroomDim / 32) * Math.max(ib.Tout_limit - airTemp[i], 0),
+      Two: ib.Two_17c + interim * (17 - airTemp[i]),
+    })
   }
 
   const iaw: InterimPump_CalcType = {

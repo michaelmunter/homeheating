@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <SignInButton afterSignInUrl={asPath} />
         )}
       </header>
-      <main className="flex-grow bg-gradient-to-b from-neutral-100 to-neutral-200">
+      <main className="flex-grow  bg-gradient-to-b from-neutral-100 to-neutral-200">
         {children}
       </main>
     </div>

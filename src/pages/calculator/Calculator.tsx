@@ -4,6 +4,7 @@ import Systems from "./Systems"
 import Results from "./Results"
 import Actions from "./Actions"
 import { useState, useEffect } from "react"
+import type { InterimBase_CalcType } from "~/server/calculations/calcModel"
 
 export type BaseType = {
   buildYear: string
@@ -23,25 +24,28 @@ export type SystemType = {
 
 export default function Calculator() {
   const [base, setBase] = useState<BaseType>({
-    buildYear: "",
-    heatLossFactor: "",
-    area: "",
+    buildYear: "2006",
+    heatLossFactor: "26",
+    area: "120",
     heatDist: "radiators",
-    residents: "",
+    residents: "4",
     tempSetting: "22",
     systemType: "aw_pump",
-    cop: "",
+    cop: "3",
     location: "DK",
   })
   const [systems, setSystems] = useState<SystemType>({
     systemType: "aw_pump",
     cop: "",
   })
+  const [results, setResults] = useState<InterimBase_CalcType | null>(null)
+
   const apiCalc = api.calc.calc.useMutation()
 
   useEffect(() => {
     apiCalc.isLoading && console.log("loading: ", apiCalc.isLoading)
-    apiCalc.isSuccess && console.log("finished: ", apiCalc.isSuccess)
+    apiCalc.isSuccess && console.log("success: ", apiCalc.isSuccess)
+    apiCalc.isSuccess && setResults(apiCalc.data?.ib)
     apiCalc.isError && console.log("error: ", apiCalc.isError)
     apiCalc.data && console.log("data: ", apiCalc.data)
   }, [apiCalc.isLoading, apiCalc.isSuccess, apiCalc.isError, apiCalc.data])
@@ -89,10 +93,10 @@ export default function Calculator() {
 
   return (
     <div className="flex flex-col items-center justify-center  ">
-      <div className="flex flex-row justify-center  gap-12 px-4 py-16 ">
+      <div className="flex flex-row justify-center gap-8 py-12 ">
         <Base handleChange={handleChange} base={base} />
         <Systems />
-        <Results />
+        <Results results={results} />
       </div>
       <Actions handleClick={handleClick} />
     </div>
