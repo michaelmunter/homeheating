@@ -24,7 +24,7 @@ export type InterimBase_CalcType = {
   Twvb: number
   QroomDim: number
   Qwvb: number
-  d: [{ Qroom: number; Two: number }] | any
+  d: { Qroom?: number; Two?: number }[]
 }
 
 type InterimPump_CalcType = {
