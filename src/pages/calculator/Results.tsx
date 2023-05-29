@@ -8,17 +8,21 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import { useState, useEffect } from "react"
-import { InterimBase_CalcType } from "~/server/calculations/calcModel"
+import type { InterimBase_CalcType } from "~/server/calculations/calcModel"
+import { type } from "os"
 
-const data = [
+const testdata = [
   { date: "2021-01-01", value: 200 },
   { date: "2021-01-02", value: 400 },
   { date: "2021-01-03", value: 200 },
   { date: "2021-01-04", value: 300 },
   { date: "2021-01-05", value: 1000 },
 ]
+type DataType = {
+  results: InterimBase_CalcType
+}
 
-export default function Results({ results }: any) {
+export default function Results({ results }: DataType) {
   const [renderChart, setRenderChart] = useState(false)
 
   useEffect(() => {
@@ -29,11 +33,11 @@ export default function Results({ results }: any) {
     return null
   }
 
-  if (!results) {
+  if (results === null) {
     return null
   }
-  console.log("Results: ")
-  console.log(results.d)
+  //console.log("Results: ")
+  //console.log(results)
 
   const renderLineChart = (
     <ResponsiveContainer

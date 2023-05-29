@@ -24,7 +24,7 @@ export type InterimBase_CalcType = {
   Twvb: number
   QroomDim: number
   Qwvb: number
-  d: { Qroom?: number; Two?: number }[]
+  d: { Qroom: number; Two: number }[]
 }
 
 type InterimPump_CalcType = {
@@ -88,7 +88,7 @@ export default function calcModel(base: BaseType, climate: Climate[]) {
         base.area) /
       1000, // !!! antager helårshus
     Qwvb: base.residents ? (base.residents * 800 + 800) / (365 * 24) : 0, // !!! burde det ikke være minus 800?
-    d: [],
+    d: [{ Qroom: 0, Two: 0 }],
   }
 
   const interim = (ib.Two_neg12c - ib.Two_17c) / 29
@@ -98,6 +98,7 @@ export default function calcModel(base: BaseType, climate: Climate[]) {
       Two: ib.Two_17c + interim * (17 - airTemp[i]),
     })
   }
+  ib.d.shift() //remove first dummy element
 
   const iaw: InterimPump_CalcType = {
     type: base.systemType,

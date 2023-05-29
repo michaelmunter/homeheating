@@ -38,7 +38,15 @@ export default function Calculator() {
     systemType: "aw_pump",
     cop: "",
   })
-  const [results, setResults] = useState<InterimBase_CalcType | null>(null)
+  const [results, setResults] = useState<InterimBase_CalcType>({
+    Tout_limit: 0,
+    Two_17c: 0,
+    Two_neg12c: 0,
+    Twvb: 0,
+    QroomDim: 0,
+    Qwvb: 0,
+    d: [{ Qroom: 0, Two: 0 }],
+  })
 
   const apiCalc = api.calc.calc.useMutation()
 
@@ -90,6 +98,7 @@ export default function Calculator() {
       setSystems((prevSystems) => ({ ...prevSystems, [name]: value }))
     }
   }
+  console.log(results)
 
   return (
     <div className="flex flex-col items-center justify-center  ">
@@ -102,5 +111,3 @@ export default function Calculator() {
     </div>
   )
 }
-
-//<System system={system} handleChange={handleChange} />
