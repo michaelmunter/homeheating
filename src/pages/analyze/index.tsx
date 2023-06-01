@@ -5,6 +5,7 @@ import Results from "./Results"
 import Actions from "./Actions"
 import { useState, useEffect } from "react"
 import type { InterimBase_CalcType } from "~/server/calculations/calcModel"
+import { NextPage } from "next"
 
 export type BaseType = {
   buildYear: string
@@ -22,7 +23,7 @@ export type SystemType = {
   cop: string
 }
 
-export default function Calculator() {
+const Analyze: NextPage = () => {
   const [base, setBase] = useState<BaseType>({
     buildYear: "2006",
     heatLossFactor: "26",
@@ -107,7 +108,10 @@ export default function Calculator() {
         <Systems />
         <Results results={results} />
       </div>
+
       <Actions handleClick={handleClick} />
     </div>
   )
 }
+
+export default Analyze

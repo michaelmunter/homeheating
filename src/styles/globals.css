@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-stone-50 text-slate-800;
+
+  overscroll-behavior: none;
+}
+
+/* Font options
+
+top   Josefin_Slab
+
+      Cormorant
+      EB_Garamond
+
+*/

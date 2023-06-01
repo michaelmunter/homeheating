@@ -39,42 +39,30 @@ export default function Results({ results }: DataType) {
   //console.log("Results: ")
   //console.log(results)
 
-  const renderLineChart = (
-    <ResponsiveContainer
-      width="100%"
-      height="100%"
-      minHeight={100}
-      minWidth={100}
-    >
+  const renderLineChart = (results: any, dataKey: string) => (
+    <div>
+      <h2 className="text-l p-2 text-center font-bold">{dataKey}</h2>
       <LineChart
-        width={500}
-        height={400}
+        width={600}
+        height={300}
         data={results.d}
-        margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
+        margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
       >
-        <Line
-          dot={false}
-          type="monotone"
-          yAxisId="right"
-          dataKey="Qroom"
-          stroke="#8884d8"
-        />
-        <YAxis width={110} yAxisId="right" orientation="right" label="Qroom" />
-        <Line
-          dot={false}
-          type="monotone"
-          yAxisId="left"
-          dataKey="Two"
-          stroke="#82ca9d"
-        />
-        <YAxis width={90} label="Two" yAxisId="left" orientation="left" />
+        <Line dot={false} type="monotone" dataKey={dataKey} stroke="#82ca9d" />
+        <YAxis />
+
         <XAxis angle={-45} textAnchor="end" interval={50} />
         <CartesianGrid stroke="#ccc" />
         <Tooltip />
         <YAxis />
       </LineChart>
-    </ResponsiveContainer>
+    </div>
   )
 
-  return <div className="w-[45rem] ">{renderLineChart}</div>
+  return (
+    <div className="w-[40rem] ">
+      {renderLineChart(results, "Two")}
+      {renderLineChart(results, "Qroom")}
+    </div>
+  )
 }

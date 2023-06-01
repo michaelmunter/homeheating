@@ -1,13 +1,9 @@
 import { type NextPage } from "next"
 
-import Calculator from "./calculator/Calculator"
+import Analyze from "./analyze"
 
 const Home: NextPage = () => {
-  return (
-    <div>
-      <Calculator />
-    </div>
-  )
+  return <Analyze />
 }
 
 export default Home

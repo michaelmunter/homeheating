@@ -1,4 +1,4 @@
-import { BaseType } from "./Calculator"
+import { BaseType } from "."
 
 type PropTypes = {
   base: BaseType
