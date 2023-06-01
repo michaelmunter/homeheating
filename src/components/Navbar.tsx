@@ -9,62 +9,63 @@ export default function NavBar() {
   const { asPath } = useRouter()
   const { isSignedIn } = useUser()
 
-  const [navbar, setNavbar] = useState(false)
+  const [showMenu, setShowMenu] = useState(true)
 
-  const navPage = [
+  const menuItems = [
     { name: "analyze", path: "/", access: true },
     { name: "saved", path: "/saved", access: isSignedIn },
     { name: "about", path: "/about", access: true },
   ]
 
   return (
-    <nav className="w-full bg-slate-300 text-neutral-400">
-      <div className="mx-auto justify-between px-4  md:flex md:items-center md:px-8 lg:max-w-7xl">
-        <div className="flex items-center  justify-between  py-3 md:block md:py-5">
-          <Link href="/" className="flex flex-row opacity-80 hover:opacity-90">
-            <Image src="/logo.png" width={40} height={40} alt="" />
-            <h2 className=" pl-4 text-3xl font-bold text-red-500">
-              HomeHeating
-            </h2>
-          </Link>
-          <ul
-            className={`items-center justify-center  space-y-6   md:flex md:space-x-6 md:space-y-0 ${
-              navbar ? "block" : "hidden"
-            }`}
-          >
-            {navPage.map(
-              ({ name, path, access }) =>
-                access && (
-                  <li key={name} className=" hover:text-neutral-100">
-                    <Link
-                      key={name}
-                      href={path}
-                      className={`${
-                        asPath === path ? "font-bold text-[#d94740]" : ""
-                      }`}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                )
-            )}
-          </ul>
-          <div>
-            {isSignedIn ? (
-              <UserButton afterSignOutUrl={asPath} />
-            ) : (
-              <SignInButton afterSignInUrl={asPath} />
-            )}
-          </div>
+    <nav className="flex w-full flex-row bg-neutral-200 text-neutral-500">
+      <div className="flex-grow p-3 pl-6">
+        <Link
+          href="/"
+          className="flex w-fit flex-row opacity-80 hover:opacity-90"
+        >
+          <Image src="/logo.png" width={30} height={30} alt="" />
+          <h2 className="pl-4 text-2xl font-bold text-red-500">HomeHeating</h2>
+        </Link>
+      </div>
+      <div className="flex flex-row items-center ">
+        <ul
+          className={`flex flex-wrap items-center ${
+            showMenu ? "block" : "hidden"
+          }`}
+        >
+          {menuItems.map(
+            ({ name, path, access }) =>
+              access && (
+                <li key={name} className=" mr-5 hover:text-neutral-100">
+                  <Link
+                    key={name}
+                    href={path}
+                    className={`${
+                      asPath === path ? "font-bold text-[#d94740]" : ""
+                    }`}
+                  >
+                    {name}
+                  </Link>
+                </li>
+              )
+          )}
+        </ul>
+        <div>
+          {isSignedIn ? (
+            <UserButton afterSignOutUrl={asPath} />
+          ) : (
+            <SignInButton afterSignInUrl={asPath} />
+          )}
+        </div>
 
-          <div className="md:hidden">
-            <button
-              className=" p-2   hover:text-neutral-100 "
-              onClick={() => setNavbar(!navbar)}
-            >
-              {navbar ? <HiX size={"1.6em"} /> : <HiMenu size={"1.6em"} />}
-            </button>
-          </div>
+        <div className=" ml-2 mr-4 h-fit md:hidden">
+          <button
+            className="text-center align-middle hover:text-neutral-100"
+            onClick={() => setShowMenu(!showMenu)}
+          >
+            {showMenu ? <HiMenu size={"2em"} /> : <HiX size={"2em"} />}
+          </button>
         </div>
       </div>
     </nav>
