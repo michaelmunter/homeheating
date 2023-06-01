@@ -16,8 +16,10 @@ const Saved: NextPage = () => {
         <h1>Saved</h1>
       </div>
     )
-  } else router.push("/")
-  return null
+  } else {
+    router.push("/")
+    return <p>redirecting...</p>
+  }
 }
 
 export default Saved
