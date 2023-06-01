@@ -22,7 +22,7 @@ type DataType = {
   results: InterimBase_CalcType
 }
 
-export default function Results({ results }: DataType) {
+export default function Results(results: DataType) {
   const [renderChart, setRenderChart] = useState(false)
 
   useEffect(() => {
@@ -39,13 +39,13 @@ export default function Results({ results }: DataType) {
   //console.log("Results: ")
   //console.log(results)
 
-  const renderLineChart = (results: any, dataKey: string) => (
+  const renderLineChart = (results: DataType, dataKey: string) => (
     <div>
       <h2 className="text-l p-2 text-center font-bold">{dataKey}</h2>
       <LineChart
         width={600}
         height={300}
-        data={results.d}
+        data={results.results.d}
         margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
       >
         <Line dot={false} type="monotone" dataKey={dataKey} stroke="#82ca9d" />
