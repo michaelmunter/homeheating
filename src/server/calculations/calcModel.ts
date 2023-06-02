@@ -1,9 +1,5 @@
 import { type Climate } from "@prisma/client"
 
-//  pwrRoom   Evp,rum   electricity consumption for room heating
-//  pwrWater  Evp,vvb   electricity consumption for hot water heating
-//  pwrAux    Qel       electricity consumption for auxiliary heating
-
 type BaseType = {
   heatLossFactor: number
   buildYear: number

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react"
 import type { InterimBase_CalcType } from "~/server/calculations/calcModel"
 import { type NextPage } from "next"
 
-export type BaseType = {
+export type HomeSpecs = {
   buildYear: string
   heatLossFactor: string
   area: string
@@ -18,13 +18,13 @@ export type BaseType = {
   cop: string
   location: string
 }
-export type SystemType = {
+export type SystemSpecs = {
   systemType: string
   cop: string
 }
 
 const Analyze: NextPage = () => {
-  const [base, setBase] = useState<BaseType>({
+  const [homeSpecs, setHomeSpecs] = useState<HomeSpecs>({
     buildYear: "2006",
     heatLossFactor: "26",
     area: "120",
@@ -35,7 +35,7 @@ const Analyze: NextPage = () => {
     cop: "3",
     location: "DK",
   })
-  const [systems, setSystems] = useState<SystemType>({
+  const [systemSpecs, setSystemSpecs] = useState<SystemSpecs>({
     systemType: "aw_pump",
     cop: "",
   })
@@ -61,17 +61,19 @@ const Analyze: NextPage = () => {
 
   const handleClick = () => {
     const parsedHome = {
-      ...base,
-      heatLossFactor: base.heatLossFactor
-        ? parseFloat(base.heatLossFactor.replace(",", ""))
+      ...homeSpecs,
+      heatLossFactor: homeSpecs.heatLossFactor
+        ? parseFloat(homeSpecs.heatLossFactor.replace(",", ""))
         : 0,
-      area: base.area ? parseFloat(base.area.replace(",", "")) : 0,
-      buildYear: base.buildYear
-        ? parseFloat(base.buildYear.replace(",", ""))
+      area: homeSpecs.area ? parseFloat(homeSpecs.area.replace(",", "")) : 0,
+      buildYear: homeSpecs.buildYear
+        ? parseFloat(homeSpecs.buildYear.replace(",", ""))
         : 0,
-      residents: base.residents ? parseInt(base.residents.replace(",", "")) : 0,
-      tempSetting: parseFloat(base.tempSetting),
-      cop: base.cop ? parseFloat(base.cop.replace(",", "")) : 0,
+      residents: homeSpecs.residents
+        ? parseInt(homeSpecs.residents.replace(",", ""))
+        : 0,
+      tempSetting: parseFloat(homeSpecs.tempSetting),
+      cop: homeSpecs.cop ? parseFloat(homeSpecs.cop.replace(",", "")) : 0,
     }
 
     for (const key in parsedHome) {
@@ -93,17 +95,20 @@ const Analyze: NextPage = () => {
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
     const { name, value } = e.target
-    if (Object.keys(base).includes(name)) {
-      setBase((prevBase) => ({ ...prevBase, [name]: value }))
-    } else if (Object.keys(systems).includes(name)) {
-      setSystems((prevSystems) => ({ ...prevSystems, [name]: value }))
+    if (Object.keys(homeSpecs).includes(name)) {
+      setHomeSpecs((prevHomeSpecs) => ({ ...prevHomeSpecs, [name]: value }))
+    } else if (Object.keys(systemSpecs).includes(name)) {
+      setSystemSpecs((prevSystemSpecs) => ({
+        ...prevSystemSpecs,
+        [name]: value,
+      }))
     }
   }
 
   return (
     <div className=" mt-10 flex w-full flex-col ">
       <div className="flex flex-row flex-wrap justify-center gap-8  ">
-        <Base handleChange={handleChange} base={base} />
+        <Base handleChange={handleChange} homeSpecs={homeSpecs} />
         <Systems />
         <Results results={results} />
       </div>

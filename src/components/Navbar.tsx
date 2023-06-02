@@ -13,6 +13,7 @@ export default function NavBar() {
 
   const menuItems = [
     { name: "analyze", path: "/", access: true },
+    { name: "analyze2", path: "/analyze2", access: true },
     { name: "saved", path: "/saved", access: isSignedIn },
     { name: "about", path: "/about", access: true },
   ]

@@ -6,9 +6,6 @@ type FormValues = {
 // let renderCount = 0
 
 export default function Systems() {
-  // console.log("renderCount: ", renderCount++)
-  // renderCount++
-
   const {
     register,
     handleSubmit,

@@ -17,6 +17,13 @@ select {
   @apply rounded-md  border border-neutral-200 bg-neutral-50  px-3 py-1 text-right text-neutral-600;
 }
 
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    @apply appearance-none;
+  }
+}
+
 /* Font options
 top   Josefin_Slab
       Cormorant

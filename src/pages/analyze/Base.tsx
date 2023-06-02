@@ -1,11 +1,46 @@
-import type { BaseType } from "."
+import { type } from "os"
+import type { HomeSpecs } from "."
+import { useForm, type SubmitHandler, useFieldArray } from "react-hook-form"
 
 type PropTypes = {
-  base: BaseType
+  homeSpecs: HomeSpecs
   handleChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement>
 }
 
-export default function Base({ base, handleChange }: PropTypes) {
+type FormValues = {
+  buildYear: number
+  heatLossFactor: number
+  area: number
+  heatDist: string
+  residents: number
+  tempSetting: number
+  systemType: string
+  cop: number
+  location: string
+}
+
+export default function Base({ homeSpecs, handleChange }: PropTypes) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+    control,
+  } = useForm<FormValues>({
+    defaultValues: {
+      buildYear: 2006,
+      heatLossFactor: 26,
+      area: 120,
+      heatDist: "radiators",
+      residents: 4,
+      tempSetting: 22,
+      systemType: "aw_pump",
+      cop: 3,
+      location: "DK",
+    },
+  })
+
   return (
     <div className=" w-60">
       <div className="grid grid-cols-2 items-center gap-2">
@@ -13,22 +48,26 @@ export default function Base({ base, handleChange }: PropTypes) {
         <input
           name="buildYear"
           onChange={handleChange}
-          value={base?.buildYear ?? ""}
+          value={homeSpecs?.buildYear ?? ""}
         ></input>
         <label>Heat Loss</label>
         <input
           name="heatLossFactor"
           onChange={handleChange}
-          value={base?.heatLossFactor ?? ""}
+          value={homeSpecs?.heatLossFactor ?? ""}
         ></input>
         <label>Area</label>
         <input
           name="area"
           onChange={handleChange}
-          value={base?.area ?? ""}
+          value={homeSpecs?.area ?? ""}
         ></input>
         <label>Distribution</label>
-        <select name="heatDist" onChange={handleChange} value={base?.heatDist}>
+        <select
+          name="heatDist"
+          onChange={handleChange}
+          value={homeSpecs?.heatDist}
+        >
           <option value="radiators">Radiators</option>
           <option value="underfloor">Underfloor</option>
         </select>
@@ -36,19 +75,19 @@ export default function Base({ base, handleChange }: PropTypes) {
         <input
           name="residents"
           onChange={handleChange}
-          value={base?.residents ?? ""}
+          value={homeSpecs?.residents ?? ""}
         ></input>
         <label>Temp. Setting</label>
         <input
           name="tempSetting"
           onChange={handleChange}
-          value={base?.tempSetting ?? ""}
+          value={homeSpecs?.tempSetting ?? ""}
         ></input>
         <label>Heat System</label>
         <select
           name="systemType"
           onChange={handleChange}
-          value={base?.systemType ?? ""}
+          value={homeSpecs?.systemType ?? ""}
         >
           <option value="aw_pump">Air-Water Pump</option>
           <option value="aa_pump">Air-Air Pump</option>
@@ -58,13 +97,13 @@ export default function Base({ base, handleChange }: PropTypes) {
         <input
           name="cop"
           onChange={handleChange}
-          value={base?.cop ?? ""}
+          value={homeSpecs?.cop ?? ""}
         ></input>
         <label>Location</label>
         <input
           name="location"
           onChange={handleChange}
-          value={base?.location ?? ""}
+          value={homeSpecs?.location ?? ""}
         ></input>
       </div>
     </div>
