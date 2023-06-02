@@ -1,7 +1,5 @@
 // components/Layout.tsx
-import { SignInButton, UserButton, useUser } from "@clerk/nextjs"
 import Head from "next/head"
-import { useRouter } from "next/router"
 import NavBar from "./Navbar"
 import { Nunito } from "next/font/google"
 

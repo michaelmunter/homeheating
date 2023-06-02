@@ -24,7 +24,7 @@ export default function NavBar() {
           href="/"
           className="flex w-fit flex-row opacity-80 hover:opacity-90"
         >
-          <Image src="/logo.png" width={30} height={30} alt="" />
+          <Image src="/logo.png" width={50} height={30} alt="logo" />
           <h2 className="pl-4 text-2xl font-bold text-red-500">HomeHeating</h2>
         </Link>
       </div>
@@ -37,7 +37,7 @@ export default function NavBar() {
           {menuItems.map(
             ({ name, path, access }) =>
               access && (
-                <li key={name} className=" mr-5 hover:text-neutral-100">
+                <li key={name} className=" mr-5 hover:text-neutral-800">
                   <Link
                     key={name}
                     href={path}
@@ -51,7 +51,7 @@ export default function NavBar() {
               )
           )}
         </ul>
-        <div>
+        <div className="pr-4">
           {isSignedIn ? (
             <UserButton afterSignOutUrl={asPath} />
           ) : (
@@ -59,9 +59,9 @@ export default function NavBar() {
           )}
         </div>
 
-        <div className=" ml-2 mr-4 h-fit md:hidden">
+        <div className="h-fit pr-4 md:hidden">
           <button
-            className="text-center align-middle hover:text-neutral-100"
+            className="text-center align-middle hover:text-neutral-800"
             onClick={() => setShowMenu(!showMenu)}
           >
             {showMenu ? <HiMenu size={"2em"} /> : <HiX size={"2em"} />}
