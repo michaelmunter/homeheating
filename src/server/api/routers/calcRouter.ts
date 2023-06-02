@@ -18,15 +18,15 @@ const clientData = z.object({
 
 export const calcRouter = createTRPCRouter({
   calc: publicProcedure.input(clientData).mutation(async ({ input }) => {
-    const climate = await prisma.climate.findMany({
+    const climate: Climate[] = await prisma.climate.findMany({
       where: {
         location: input.location,
       },
     })
 
-    if (!(climate.length > 0)) {
-      throw new Error("No climate data found for this location")
-    }
+    // if (!(climate.length > 0)) {
+    //   throw new Error("No climate data found for this location")
+    // }
     const result = calcModel(input, climate)
     return result
   }),
