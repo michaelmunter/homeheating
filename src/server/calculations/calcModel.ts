@@ -1,5 +1,4 @@
-import { Climate } from "@prisma/client"
-import { type } from "os"
+import { type Prisma } from "@prisma/client"
 
 //  pwrRoom   Evp,rum   electricity consumption for room heating
 //  pwrWater  Evp,vvb   electricity consumption for hot water heating
@@ -71,7 +70,10 @@ interface AAPumpType extends SystemType {
 
 type SystemsType = (AWPumpType | AAPumpType)[]
 
-export default function calcModel(base: BaseType, climate: Climate[]) {
+export default function calcModel(
+  base: BaseType,
+  climate: Prisma.ClimateSelect[]
+) {
   const airTemp = climate.map((row) => row.air_temp) as any[]
 
   const ib: InterimBase_CalcType = {

@@ -1,23 +1,7 @@
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
 import { useState, useEffect } from "react"
 import type { InterimBase_CalcType } from "~/server/calculations/calcModel"
-import { type } from "os"
 
-const testdata = [
-  { date: "2021-01-01", value: 200 },
-  { date: "2021-01-02", value: 400 },
-  { date: "2021-01-03", value: 200 },
-  { date: "2021-01-04", value: 300 },
-  { date: "2021-01-05", value: 1000 },
-]
 type DataType = {
   results: InterimBase_CalcType
 }

@@ -5,7 +5,7 @@ import Results from "./Results"
 import Actions from "./Actions"
 import { useState, useEffect } from "react"
 import type { InterimBase_CalcType } from "~/server/calculations/calcModel"
-import { NextPage } from "next"
+import { type NextPage } from "next"
 
 export type BaseType = {
   buildYear: string

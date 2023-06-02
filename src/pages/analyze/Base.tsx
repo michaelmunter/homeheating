@@ -1,4 +1,4 @@
-import { BaseType } from "."
+import type { BaseType } from "."
 
 type PropTypes = {
   base: BaseType

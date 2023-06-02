@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler, useFieldArray } from "react-hook-form"
+import { useForm, type SubmitHandler, useFieldArray } from "react-hook-form"
 
 type FormValues = {
   system: { type: string; COP: number }[]
