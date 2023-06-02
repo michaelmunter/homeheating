@@ -18,7 +18,7 @@ const clientData = z.object({
 
 export const calcRouter = createTRPCRouter({
   calc: publicProcedure.input(clientData).mutation(async ({ input }) => {
-    const climate: Climate[] = await prisma.climate.findMany({
+    const climate = await prisma.climate.findMany({
       where: {
         location: input.location,
       },
