@@ -35,7 +35,7 @@ export default function Systems() {
   }
 
   return (
-    <div className="w-52">
+    <div className="w-52 ">
       <form
         className="flex flex-col "
         onSubmit={(e) => {
@@ -45,7 +45,7 @@ export default function Systems() {
       >
         <button
           type="button"
-          className="mb-2 bg-green-400"
+          className="mb-2 rounded-md bg-green-700 px-4 py-1 text-green-50 opacity-80 hover:opacity-100"
           onClick={() => {
             prepend({ type: "", COP: 0 })
           }}
@@ -56,7 +56,7 @@ export default function Systems() {
           return (
             <section
               key={field.id}
-              className="mb-4 flex flex-col gap-2 bg-gray-300 p-4"
+              className="mb-4 flex flex-col gap-2 rounded-md bg-neutral-600 p-4"
             >
               <select {...register(`system.${index}.type`)}>
                 <option value="">--Heat Solution--</option>
@@ -64,8 +64,8 @@ export default function Systems() {
                 <option value="aaPump">Air-Air Heat Pump</option>
                 <option value="gwPump">Ground-Water Heat Pump</option>
               </select>
-              <div className="flex">
-                <label className="flex-grow pr-8">COP</label>
+              <div className="flex items-center">
+                <label className="flex-grow pr-8 text-neutral-100">COP</label>
                 <input
                   className=" w-9 text-center "
                   {...register(`system.${index}.COP`)}
@@ -73,7 +73,7 @@ export default function Systems() {
               </div>
               <button
                 type="button"
-                className="bg-red-400"
+                className=" ml-auto w-fit rounded-md bg-red-600 px-2 py-1 text-sm text-red-50 opacity-80 hover:opacity-100"
                 onClick={() => remove(index)}
               >
                 Remove
@@ -82,7 +82,10 @@ export default function Systems() {
           )
         })}
 
-        <button type="submit" className="bg-blue-400">
+        <button
+          type="submit"
+          className="rounded-md bg-orange-600 py-1 text-orange-50 opacity-80 hover:opacity-100"
+        >
           Submit
         </button>
       </form>

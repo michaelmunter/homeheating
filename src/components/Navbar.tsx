@@ -18,16 +18,17 @@ export default function NavBar() {
   ]
 
   return (
-    <nav className="flex w-full flex-row bg-neutral-200 text-neutral-500">
-      <div className="flex-grow p-3 pl-6">
+    <nav className="flex w-full flex-row ">
+      <div className="flex-grow p-3 pl-6 ">
         <Link
           href="/"
           className="flex w-fit flex-row opacity-80 hover:opacity-90"
         >
-          <Image src="/logo.png" width={50} height={30} alt="logo" />
+          <Image src="/logo.png" width={37} height={30} alt="logo" />
           <h2 className="pl-4 text-2xl font-bold text-red-500">HomeHeating</h2>
         </Link>
       </div>
+
       <div className="flex flex-row items-center ">
         <ul
           className={`flex flex-wrap items-center ${
@@ -37,12 +38,12 @@ export default function NavBar() {
           {menuItems.map(
             ({ name, path, access }) =>
               access && (
-                <li key={name} className=" mr-5 hover:text-neutral-800">
+                <li key={name} className=" mr-5 opacity-80 hover:opacity-100">
                   <Link
                     key={name}
                     href={path}
                     className={`${
-                      asPath === path ? "font-bold text-[#d94740]" : ""
+                      asPath === path ? "font-bold text-red-500" : ""
                     }`}
                   >
                     {name}
@@ -51,7 +52,7 @@ export default function NavBar() {
               )
           )}
         </ul>
-        <div className="pr-4">
+        <div className="mr-4 opacity-80 hover:opacity-100">
           {isSignedIn ? (
             <UserButton afterSignOutUrl={asPath} />
           ) : (
@@ -64,7 +65,7 @@ export default function NavBar() {
             className="text-center align-middle hover:text-neutral-800"
             onClick={() => setShowMenu(!showMenu)}
           >
-            {showMenu ? <HiMenu size={"2em"} /> : <HiX size={"2em"} />}
+            {showMenu ? <HiMenu size={"1.7em"} /> : <HiX size={"1.7em"} />}
           </button>
         </div>
       </div>

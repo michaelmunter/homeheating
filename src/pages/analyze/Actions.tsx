@@ -13,7 +13,7 @@ export default function Actions({ handleClick }: PropTypes) {
   return (
     <div>
       <button
-        className="text-l mt-4 w-fit rounded-md bg-red-900 p-3  text-white"
+        className="text-l mt-4 w-fit rounded-md bg-red-700 p-3 text-white opacity-90  hover:opacity-100"
         onClick={handleClick}
       >
         Calculate

@@ -52,11 +52,11 @@ const Analyze: NextPage = () => {
   const apiCalc = api.calc.calc.useMutation()
 
   useEffect(() => {
-    apiCalc.isLoading && console.log("loading: ", apiCalc.isLoading)
+    // apiCalc.isLoading && console.log("loading: ", apiCalc.isLoading)
     apiCalc.isSuccess && console.log("success: ", apiCalc.isSuccess)
     apiCalc.isSuccess && setResults(apiCalc.data?.ib)
     apiCalc.isError && console.log("error: ", apiCalc.isError)
-    apiCalc.data && console.log("data: ", apiCalc.data)
+    // apiCalc.data && console.log("data: ", apiCalc.data)
   }, [apiCalc.isLoading, apiCalc.isSuccess, apiCalc.isError, apiCalc.data])
 
   const handleClick = () => {
@@ -99,11 +99,10 @@ const Analyze: NextPage = () => {
       setSystems((prevSystems) => ({ ...prevSystems, [name]: value }))
     }
   }
-  console.log(results)
 
   return (
-    <div className="flex flex-col items-center justify-center  ">
-      <div className="flex flex-row justify-center gap-8 py-12 ">
+    <div className=" mt-10 flex w-full flex-col ">
+      <div className="flex flex-row flex-wrap justify-center gap-8  ">
         <Base handleChange={handleChange} base={base} />
         <Systems />
         <Results results={results} />
@@ -115,3 +114,7 @@ const Analyze: NextPage = () => {
 }
 
 export default Analyze
+
+{
+  /* <div className=" grid grid-cols-1 gap-4 bg-slate-500 sm:grid-cols-2 md:grid-cols-3 "> */
+}

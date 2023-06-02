@@ -7,8 +7,8 @@ type PropTypes = {
 
 export default function Base({ base, handleChange }: PropTypes) {
   return (
-    <div className="w-52">
-      <div className="grid grid-cols-2 gap-2">
+    <div className=" w-60">
+      <div className="grid grid-cols-2 items-center gap-2">
         <label>Building Year</label>
         <input
           name="buildYear"

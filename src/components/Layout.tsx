@@ -10,7 +10,7 @@ const nunito = Nunito({
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`flex min-h-screen flex-col ${nunito.className}`}>
+    <div className={`flex min-h-screen w-screen flex-col  ${nunito.className}`}>
       <Head>
         <title>HomeHeating.App</title>
         <meta name="HomeHeating APP" content="analyze heating solutions" />
@@ -18,9 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Head>
       <NavBar />
 
-      <main className="flex-grow  bg-gradient-to-b from-neutral-100 to-neutral-200">
-        {children}
-      </main>
+      <main className="mx-2 items-center">{children}</main>
     </div>
   )
 }

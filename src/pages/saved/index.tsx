@@ -6,7 +6,11 @@ const Saved: NextPage = () => {
   if (!user.isSignedIn) {
     return null
   }
-  return <div>Saved entries</div>
+  return (
+    <div className=" mx-auto my-8 max-w-2xl bg-slate-400 px-4">
+      <p>Saved entries</p>
+    </div>
+  )
 }
 
 export default Saved
