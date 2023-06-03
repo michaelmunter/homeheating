@@ -1,4 +1,4 @@
-import { type Climate } from "@prisma/client"
+// import { type Climate } from "@prisma/client"
 
 // export type BaseData = {
 //   heatLossFactor: number
@@ -67,7 +67,8 @@ import { type Climate } from "@prisma/client"
 // interface gwPump extends SystemData {}
 // type SystemsType = (awPump | aaPump | gwPump)[]
 
-export default function analyzer(u: any, climate: Climate[]) {
+export default function analyzer() {
+  // export default function analyzer(u: any, climate: Climate[]) {
   //CALCULATE BASE DATA
   // const b: Base = {
   //   Tout_limit: u.tempSetting > 18 ? u.tempSetting - 4 : u.tempSetting - 1,
