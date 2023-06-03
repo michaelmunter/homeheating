@@ -194,7 +194,7 @@ const Analyze: NextPage = () => {
           </div>
         </form>
         <div className="w-[30em]">
-          <Results results={apiCalc.data?.b} />
+          <Results />
         </div>
       </div>
     </div>
@@ -202,3 +202,5 @@ const Analyze: NextPage = () => {
 }
 
 export default Analyze
+
+// results={apiCalc.data?.b}
