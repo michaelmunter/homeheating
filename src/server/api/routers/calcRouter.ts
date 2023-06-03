@@ -31,7 +31,7 @@ export const calcRouter = createTRPCRouter({
     if (!(climate.length > 0)) {
       throw new Error("No climate data found for this location")
     }
-    // const result = analyzer(input, climate)
-    return null //result
+    const result = analyzer(input, climate)
+    return result
   }),
 })
