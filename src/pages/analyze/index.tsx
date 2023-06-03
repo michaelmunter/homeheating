@@ -4,6 +4,7 @@ import { useForm, type SubmitHandler, useFieldArray } from "react-hook-form"
 import { useEffect } from "react"
 
 import { type NextPage } from "next"
+import Results from "./Results"
 // import Results from "./Results"
 
 // type FormValues = {
@@ -202,7 +203,11 @@ import { type NextPage } from "next"
 // }
 
 const Analyze: NextPage = () => {
-  return <div> test</div>
+  return (
+    <div>
+      <Results />
+    </div>
+  )
 }
 
 export default Analyze

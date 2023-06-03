@@ -63,3 +63,7 @@
 //     </div>
 //   )
 // }
+
+export default function Results() {
+  return <div>test</div>
+}
