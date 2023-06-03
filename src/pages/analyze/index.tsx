@@ -1,11 +1,8 @@
 import { api } from "~/utils/api"
 import { useForm, type SubmitHandler, useFieldArray } from "react-hook-form"
-
 import { useEffect } from "react"
-
 import { type NextPage } from "next"
 import Results from "./Results"
-// import Results from "./Results"
 
 // type FormValues = {
 //   buildYear: number
@@ -196,13 +193,38 @@ import Results from "./Results"
 //             </button>
 //           </div>
 //         </form>
-//         <div className="w-[30em]"></div>
+//         <div className="w-[30em]">
+//           <Results results={apiCalc.data?.b} />
+//         </div>
 //       </div>
 //     </div>
 //   )
 // }
 
 const Analyze: NextPage = () => {
+  const apiCalc = api.calc.calc.useMutation()
+  useEffect(() => {
+    apiCalc.mutate({
+      buildYear: 1990,
+      heatLossFactor: 0.1,
+      area: 100,
+      heatDist: "floor",
+      residents: 2,
+      tempSetting: 20,
+      location: "DK",
+      systems: [
+        {
+          type: "awPump",
+          COP: 3,
+        },
+        {
+          type: "aaPump",
+          COP: 3,
+        },
+      ],
+    })
+  }, [])
+
   return (
     <div>
       <Results />
@@ -211,6 +233,3 @@ const Analyze: NextPage = () => {
 }
 
 export default Analyze
-{
-  /* <Results results={apiCalc.data?.b} /> */
-}
