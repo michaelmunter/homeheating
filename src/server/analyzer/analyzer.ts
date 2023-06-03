@@ -1,4 +1,4 @@
-// import { type Climate } from "@prisma/client"
+import { type Climate } from "@prisma/client"
 
 // export type BaseData = {
 //   heatLossFactor: number
@@ -38,19 +38,19 @@
 //   }[]
 // }
 
-// type UserSpecs = {
-//   heatLossFactor: number
-//   buildYear: number
-//   area: number
-//   heatDist: string
-//   residents: number
-//   tempSetting: number
-//   location: string
-//   systems: {
-//     type: string
-//     COP: number
-//   }[]
-// }
+type UserSpecs = {
+  heatLossFactor: number
+  buildYear: number
+  area: number
+  heatDist: string
+  residents: number
+  tempSetting: number
+  location: string
+  systems: {
+    type: string
+    COP: number
+  }[]
+}
 
 // export type Base = {
 //   Tout_limit: number
@@ -67,8 +67,7 @@
 // interface gwPump extends SystemData {}
 // type SystemsType = (awPump | aaPump | gwPump)[]
 
-export default function analyzer() {
-  // export default function analyzer(u: any, climate: Climate[]) {
+export default function analyzer(u: UserSpecs, climate: Climate[]) {
   //CALCULATE BASE DATA
   // const b: Base = {
   //   Tout_limit: u.tempSetting > 18 ? u.tempSetting - 4 : u.tempSetting - 1,
