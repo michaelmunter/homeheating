@@ -93,6 +93,7 @@ export default function analyzer(u: UserSpecs, climate: Climate[]) {
   //   })
   // })
   // b.d.shift() //remove dummy element required for initialization = {Qroom: 0, Two: 0}
-  return null
-  // return { b, climate }
+
+  return { u, climate }
+  //  return { b, climate }
 }
