@@ -1,6 +1,6 @@
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc"
 import { z } from "zod"
-// import analyzer from "~/server/analyzer/analyzer"
+import analyzer from "~/server/analyzer/analyzer"
 import { prisma } from "~/server/db"
 import { type Climate } from "@prisma/client"
 
@@ -31,7 +31,7 @@ export const calcRouter = createTRPCRouter({
     if (!(climate.length > 0)) {
       throw new Error("No climate data found for this location")
     }
-    // const result = analyzer(input, climate)
-    return null //result
+    const result = analyzer(input, climate)
+    return result
   }),
 })
