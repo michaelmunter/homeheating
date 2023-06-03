@@ -4,7 +4,7 @@ import { useForm, type SubmitHandler, useFieldArray } from "react-hook-form"
 import { useEffect } from "react"
 
 import { type NextPage } from "next"
-import Results from "./Results"
+// import Results from "./Results"
 
 type FormValues = {
   buildYear: number
@@ -195,12 +195,13 @@ const Analyze: NextPage = () => {
             </button>
           </div>
         </form>
-        <div className="w-[30em]">
-          <Results results={apiCalc.data?.b} />
-        </div>
+        <div className="w-[30em]"></div>
       </div>
     </div>
   )
 }
 
 export default Analyze
+{
+  /* <Results results={apiCalc.data?.b} /> */
+}
