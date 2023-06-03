@@ -8,13 +8,14 @@ import {
   Tooltip,
 } from "recharts"
 import { useState, useEffect } from "react"
-import type { InterimBase_CalcType } from "~/server/calculations/calcModel"
+import type { Base } from "~/server/analyzer/analyzer"
+import { type } from "os"
 
-type DataType = {
-  results: InterimBase_CalcType
+type Props = {
+  results?: Base
 }
 
-export default function Results(results: DataType) {
+export default function Results({ results }: Props) {
   const [renderChart, setRenderChart] = useState(false)
 
   useEffect(() => {
@@ -25,16 +26,17 @@ export default function Results(results: DataType) {
     return null
   }
 
-  if (results === null) {
+  if (results === null || results === undefined || results.d === undefined) {
     return null
   }
+  console.log(results)
 
-  const renderLineChart = (results: DataType, dataKey: string) => (
+  const renderLineChart = (results: Base, dataKey: string) => (
     <div>
       <h2 className="text-l p-2 text-center font-bold">{dataKey}</h2>
-      <ResponsiveContainer width="90%" height={200} className="text-sm">
+      <ResponsiveContainer width="100%" height={200} className="text-sm">
         <LineChart
-          data={results.results.d}
+          data={results.d}
           margin={{ top: 0, right: 0, left: 0, bottom: 5 }}
         >
           <Line
@@ -55,7 +57,7 @@ export default function Results(results: DataType) {
   )
 
   return (
-    <div className="w-[30em] ">
+    <div>
       <div className="w-full">{renderLineChart(results, "Two")}</div>
       <div className="w-full">{renderLineChart(results, "Qroom")}</div>
     </div>

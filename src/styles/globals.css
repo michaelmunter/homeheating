@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 nav {
-  @apply bg-neutral-100 text-neutral-500 shadow-md shadow-neutral-200;
+  @apply bg-neutral-50 text-neutral-500 shadow-md shadow-neutral-200;
 }
 
 body {
-  @apply bg-neutral-100 text-neutral-800;
+  @apply bg-neutral-50 text-neutral-800;
 
   overscroll-behavior: none;
 }
@@ -15,6 +15,9 @@ body {
 input,
 select {
   @apply rounded-md  border border-neutral-200 bg-neutral-50  px-3 py-1 text-right text-neutral-600;
+}
+select {
+  @apply px-1  text-center;
 }
 
 @layer utilities {

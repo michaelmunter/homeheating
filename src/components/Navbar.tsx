@@ -12,8 +12,7 @@ export default function NavBar() {
   const [showMenu, setShowMenu] = useState(true)
 
   const menuItems = [
-    { name: "analyze", path: "/", access: true },
-    { name: "analyze2", path: "/analyze2", access: true },
+    { name: "analyze", path: "/analyze", access: true },
     { name: "saved", path: "/saved", access: isSignedIn },
     { name: "about", path: "/about", access: true },
   ]

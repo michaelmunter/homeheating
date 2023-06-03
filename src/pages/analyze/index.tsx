@@ -1,125 +1,206 @@
 import { api } from "~/utils/api"
-import Base from "./Base"
-import Systems from "./Systems"
-import Results from "./Results"
-import Actions from "./Actions"
-import { useState, useEffect } from "react"
-import type { InterimBase_CalcType } from "~/server/calculations/calcModel"
-import { type NextPage } from "next"
+import { useForm, type SubmitHandler, useFieldArray } from "react-hook-form"
 
-export type HomeSpecs = {
-  buildYear: string
-  heatLossFactor: string
-  area: string
+import { useEffect } from "react"
+
+import { type NextPage } from "next"
+import Results from "./Results"
+
+type FormValues = {
+  buildYear: number
+  heatLossFactor: number
+  area: number
   heatDist: string
-  residents: string
-  tempSetting: string
-  systemType: string
-  cop: string
+  residents: number
+  tempSetting: number
   location: string
-}
-export type SystemSpecs = {
-  systemType: string
-  cop: string
+  systems: { type: string; COP: number }[]
 }
 
 const Analyze: NextPage = () => {
-  const [homeSpecs, setHomeSpecs] = useState<HomeSpecs>({
-    buildYear: "2006",
-    heatLossFactor: "26",
-    area: "120",
-    heatDist: "radiators",
-    residents: "4",
-    tempSetting: "22",
-    systemType: "aw_pump",
-    cop: "3",
-    location: "DK",
+  const apiCalc = api.calc.calc.useMutation()
+  const {
+    register,
+    handleSubmit,
+    control,
+    getValues,
+    formState,
+    reset,
+    watch,
+  } = useForm<FormValues>({
+    defaultValues: {
+      buildYear: 2006,
+      heatLossFactor: 26,
+      area: 120,
+      heatDist: "radiators",
+      residents: 4,
+      tempSetting: 22,
+      location: "DK",
+      systems: [
+        {
+          type: "awPump",
+          COP: 3,
+        },
+        {
+          type: "awPump",
+          COP: 2,
+        },
+      ],
+    },
   })
-  const [systemSpecs, setSystemSpecs] = useState<SystemSpecs>({
-    systemType: "aw_pump",
-    cop: "",
-  })
-  const [results, setResults] = useState<InterimBase_CalcType>({
-    Tout_limit: 0,
-    Two_17c: 0,
-    Two_neg12c: 0,
-    Twvb: 0,
-    QroomDim: 0,
-    Qwvb: 0,
-    d: [{ Qroom: 0, Two: 0 }],
+  const { errors } = formState
+  const { fields, prepend, remove } = useFieldArray<FormValues>({
+    name: "systems",
+    control,
   })
 
-  const apiCalc = api.calc.calc.useMutation()
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    apiCalc.mutate(data)
+    console.log(data)
+  }
 
   useEffect(() => {
-    // apiCalc.isLoading && console.log("loading: ", apiCalc.isLoading)
     apiCalc.isSuccess && console.log("success: ", apiCalc.isSuccess)
-    apiCalc.isSuccess && setResults(apiCalc.data?.ib)
     apiCalc.isError && console.log("error: ", apiCalc.isError)
-    // apiCalc.data && console.log("data: ", apiCalc.data)
   }, [apiCalc.isLoading, apiCalc.isSuccess, apiCalc.isError, apiCalc.data])
 
-  const handleClick = () => {
-    const parsedHome = {
-      ...homeSpecs,
-      heatLossFactor: homeSpecs.heatLossFactor
-        ? parseFloat(homeSpecs.heatLossFactor.replace(",", ""))
-        : 0,
-      area: homeSpecs.area ? parseFloat(homeSpecs.area.replace(",", "")) : 0,
-      buildYear: homeSpecs.buildYear
-        ? parseFloat(homeSpecs.buildYear.replace(",", ""))
-        : 0,
-      residents: homeSpecs.residents
-        ? parseInt(homeSpecs.residents.replace(",", ""))
-        : 0,
-      tempSetting: parseFloat(homeSpecs.tempSetting),
-      cop: homeSpecs.cop ? parseFloat(homeSpecs.cop.replace(",", "")) : 0,
-    }
-
-    for (const key in parsedHome) {
-      if (
-        parsedHome[key as keyof typeof parsedHome] === null ||
-        parsedHome[key as keyof typeof parsedHome] === ""
-      ) {
-        alert(`Please fill out ${key} before submitting.`)
-        return // Exit the function if a required value is missing
-      }
-    }
-
-    //test
-    apiCalc.mutate(parsedHome)
-    console.log("object sent: ", parsedHome)
-  }
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
-  ) => {
-    const { name, value } = e.target
-    if (Object.keys(homeSpecs).includes(name)) {
-      setHomeSpecs((prevHomeSpecs) => ({ ...prevHomeSpecs, [name]: value }))
-    } else if (Object.keys(systemSpecs).includes(name)) {
-      setSystemSpecs((prevSystemSpecs) => ({
-        ...prevSystemSpecs,
-        [name]: value,
-      }))
-    }
-  }
-
+  //TODO: form validation messages and styling (when typing in input field, error message should disappear)
   return (
-    <div className=" mt-10 flex w-full flex-col ">
-      <div className="flex flex-row flex-wrap justify-center gap-8  ">
-        <Base handleChange={handleChange} homeSpecs={homeSpecs} />
-        <Systems />
-        <Results results={results} />
+    <div className="mt-10 flex w-full flex-col ">
+      <div className="flex flex-row flex-wrap justify-center gap-8">
+        <form
+          className="flex flex-row flex-wrap justify-center gap-8 "
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit(onSubmit)(e).catch((err) => console.log(err))
+          }}
+        >
+          <div className=" grid h-fit w-60 grid-cols-2 items-center gap-y-2 rounded-md bg-neutral-300 px-4 py-2">
+            <label>Building Year</label>
+            <input
+              type="number"
+              {...register("buildYear", {
+                valueAsNumber: true,
+                required: { value: true, message: "required" },
+                min: 1900,
+                max: 2050,
+              })}
+            />
+            <p className=" col-span-2 text-sm text-red-400">
+              {errors.buildYear?.message}
+            </p>
+            <label>Heat Loss</label>
+            <input
+              type="number"
+              {...register("heatLossFactor", {
+                valueAsNumber: true,
+                required: { value: true, message: "required" },
+                min: 0,
+                max: 10000,
+              })}
+            />
+            <label>Area</label>
+            <input
+              type="number"
+              {...register("area", {
+                valueAsNumber: true,
+                required: { value: true, message: "required" },
+                min: 10,
+                max: 1000,
+              })}
+            />
+            <label>Heat Distribution</label>
+            <select
+              {...register("heatDist", {
+                required: { value: true, message: "required" },
+              })}
+            >
+              <option value="radiators">Radiators</option>
+              <option value="floor">Floor</option>
+            </select>
+            <label>Residents</label>
+            <input
+              type="number"
+              {...register("residents", {
+                valueAsNumber: true,
+                required: { value: true, message: "required" },
+                min: 0,
+                max: 1000,
+              })}
+            />
+            <label>Temperature Setting</label>
+            <input
+              type="number"
+              {...register("tempSetting", {
+                valueAsNumber: true,
+                required: { value: true, message: "required" },
+                min: 0,
+                max: 40,
+              })}
+            />
+          </div>
+          <div className="flex w-60 flex-col">
+            <button
+              type="button"
+              className="mb-2 rounded-md bg-green-700 px-4 py-2 text-green-50 opacity-80 hover:opacity-100"
+              onClick={() => {
+                prepend({ type: "", COP: 0 })
+              }}
+            >
+              Add System
+            </button>
+            {fields.map((field, index) => {
+              return (
+                <section
+                  key={field.id}
+                  className="mb-4 flex flex-col gap-2 rounded-md  bg-neutral-300 p-4"
+                >
+                  <select
+                    {...register(`systems.${index}.type`, {
+                      required: { value: true, message: "required" },
+                    })}
+                  >
+                    <option value="">--Heat Solution--</option>
+                    <option value="awPump">Air-Water Heat Pump</option>
+                    <option value="aaPump">Air-Air Heat Pump</option>
+                    <option value="gwPump">Ground-Water Heat Pump</option>
+                  </select>
+                  <div className="flex items-center">
+                    <label className="flex-grow pl-4 ">COP</label>
+                    <input
+                      className=" w-9 text-center "
+                      {...register(`systems.${index}.COP`, {
+                        valueAsNumber: true,
+                        required: { value: true, message: "required" },
+                        min: 0,
+                        max: 9,
+                      })}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className=" ml-auto w-fit rounded-md bg-red-600 px-2 py-1 text-sm text-red-50 opacity-80 hover:opacity-100"
+                    onClick={() => remove(index)}
+                  >
+                    Remove
+                  </button>
+                </section>
+              )
+            })}
+            <button
+              type="submit"
+              className="rounded-md bg-orange-700 py-2 text-orange-50 opacity-80 hover:opacity-100"
+            >
+              Analyze
+            </button>
+          </div>
+        </form>
+        <div className="w-[30em]">
+          <Results results={apiCalc.data?.b} />
+        </div>
       </div>
-
-      <Actions handleClick={handleClick} />
     </div>
   )
 }
 
 export default Analyze
-
-{
-  /* <div className=" grid grid-cols-1 gap-4 bg-slate-500 sm:grid-cols-2 md:grid-cols-3 "> */
-}
