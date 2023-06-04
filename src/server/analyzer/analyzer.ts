@@ -1,4 +1,5 @@
 import { type Climate } from "@prisma/client"
+import { type } from "os"
 
 // export type BaseData = {
 //   heatLossFactor: number
@@ -16,27 +17,28 @@ import { type Climate } from "@prisma/client"
 //   Qwvb?: number | null
 //   d: { Qroom: number | null; Two: number | null }[]
 // }
-// export type SystemData = {
-//   type: string
-//   COP: number
-//   Qnom?: number | null
-//   dCOPdTb?: number | null
-//   dQdTb?: number | null
-//   dCOPdTwo?: number | null
-//   dQdTwo?: number | null
-//   Two_max?: number | null
-//   d?: {
-//     Proom: number | null
-//     Pwvb: number | null
-//     QvpRoom: number | null
-//     QvpWvb: number | null
-//     Twvb: number | null
-//     Troom: number | null
-//     EvpRoom: number | null
-//     EvpWvb: number | null
-//     Qel: number | null
-//   }[]
-// }
+
+export type System = {
+  type: string
+  COP: number
+  Qnom?: number | null
+  dCOPdTb?: number | null
+  dQdTb?: number | null
+  dCOPdTwo?: number | null
+  dQdTwo?: number | null
+  Two_max?: number | null
+  d?: {
+    Proom: number | null
+    Pwvb: number | null
+    QvpRoom: number | null
+    QvpWvb: number | null
+    Twvb: number | null
+    Troom: number | null
+    EvpRoom: number | null
+    EvpWvb: number | null
+    Qel: number | null
+  }[]
+}
 
 type UserSpecs = {
   heatLossFactor: number
@@ -61,6 +63,11 @@ export type Base = {
   Qwvb: number
   d: { Qroom: number; Two: number }[]
 }
+
+type sysTest = {
+  type: string
+  COP: number
+}[]
 
 // interface awPump extends SystemData {}
 // interface aaPump extends SystemData {}
@@ -94,5 +101,12 @@ export default function analyzer(u: UserSpecs, climate: Climate[]) {
   })
   b.d.shift() //remove dummy element required for initialization = {Qroom: 0, Two: 0}
 
-  return { b, climate }
+  const s = u.systems.map((sys) => {
+    return {
+      type: sys.type,
+      COP: sys.COP,
+    }
+  })
+
+  return { b, climate, s }
 }

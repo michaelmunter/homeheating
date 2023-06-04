@@ -59,6 +59,7 @@ const Analyze: NextPage = () => {
 
   useEffect(() => {
     apiCalc.isSuccess && console.log("success: ", apiCalc.isSuccess)
+    apiCalc.isSuccess && console.log("data: ", apiCalc.data)
     apiCalc.isError && console.log("error: ", apiCalc.isError)
   }, [apiCalc.isLoading, apiCalc.isSuccess, apiCalc.isError, apiCalc.data])
 
@@ -202,5 +203,3 @@ const Analyze: NextPage = () => {
 }
 
 export default Analyze
-
-// results={apiCalc.data?.b}
