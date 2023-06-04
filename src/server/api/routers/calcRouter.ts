@@ -16,6 +16,7 @@ const zodUserSpecs = z.object({
     z.object({
       type: z.string(),
       COP: z.number(),
+      maxOutput: z.number(),
     })
   ),
 })

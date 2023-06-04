@@ -50,6 +50,7 @@ type UserSpecs = {
   location: string
   systems: {
     type: string
+    maxOutput: number
     COP: number
   }[]
 }
@@ -102,9 +103,14 @@ export default function analyzer(u: UserSpecs, climate: Climate[]) {
   b.d.shift() //remove dummy element required for initialization = {Qroom: 0, Two: 0}
 
   const s = u.systems.map((sys) => {
+    const type = sys.type
+    const COP = sys.COP
+    const maxOutput = sys.maxOutput
+
     return {
-      type: sys.type,
-      COP: sys.COP,
+      type,
+      COP,
+      maxOutput,
     }
   })
 

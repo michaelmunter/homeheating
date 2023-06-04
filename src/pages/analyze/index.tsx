@@ -12,7 +12,7 @@ type FormValues = {
   residents: number
   tempSetting: number
   location: string
-  systems: { type: string; COP: number }[]
+  systems: { type: string; maxOutput: number; COP: number }[]
 }
 
 const Analyze: NextPage = () => {
@@ -37,10 +37,12 @@ const Analyze: NextPage = () => {
       systems: [
         {
           type: "awPump",
+          maxOutput: 4,
           COP: 3,
         },
         {
           type: "awPump",
+          maxOutput: 3,
           COP: 2,
         },
       ],
@@ -143,7 +145,7 @@ const Analyze: NextPage = () => {
               type="button"
               className="mb-2 rounded-md bg-green-700 px-4 py-2 text-green-50 opacity-80 hover:opacity-100"
               onClick={() => {
-                prepend({ type: "", COP: 0 })
+                prepend({ type: "", maxOutput: 0, COP: 0 })
               }}
             >
               Add System
@@ -164,6 +166,18 @@ const Analyze: NextPage = () => {
                     <option value="aaPump">Air-Air Heat Pump</option>
                     <option value="gwPump">Ground-Water Heat Pump</option>
                   </select>
+                  <div className="flex items-center">
+                    <label className="flex-grow pl-4 ">Max Output (kW)</label>
+                    <input
+                      className=" w-9 text-center "
+                      {...register(`systems.${index}.maxOutput`, {
+                        valueAsNumber: true,
+                        required: { value: true, message: "required" },
+                        min: 0,
+                        max: 100,
+                      })}
+                    />
+                  </div>
                   <div className="flex items-center">
                     <label className="flex-grow pl-4 ">COP</label>
                     <input
